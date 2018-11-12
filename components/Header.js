@@ -4,6 +4,15 @@ import * as theme from '../utils/theme';
 import { Icon } from 'react-native-elements';
 
 export default class Header extends Component {
+  makeAddr(loc) {
+    let addr = 'Getting your address..';
+    if (loc) {
+      const { name, street, city, regionCode, country } = loc[0];
+      addr = `${name} ${street}, ${city}, ${regionCode}, ${country}`;
+    }
+    return addr;
+  }
+
   render() {
     return (
       <View style={theme.headerContainer}>
@@ -12,7 +21,7 @@ export default class Header extends Component {
           <Text style={theme.headerLeftText}>Change Location</Text>
         </View>
         <View style={theme.headerRight}>
-          <Text>1106 Pacific St.</Text>
+          <Text>{this.makeAddr(this.props.location)}</Text>
         </View>
       </View>
     )
