@@ -8,7 +8,7 @@ import * as theme from '../utils/theme';
 import Header from '../components/Header';
 import Main from '../components/Main';
 
-const usStateCode = require('../utils/usStateCode.json');
+const usStateCode = require('../utils/json/usStateCode.json');
 
 export default class MainScreen extends Component {
   constructor(props) {
@@ -47,13 +47,14 @@ export default class MainScreen extends Component {
     // Parse longitude and latitude and get current address
     const { longitude, latitude } = gps.coords;
     // Debugging with L.A.
-    const location = await Location.reverseGeocodeAsync({
+    let location = await Location.reverseGeocodeAsync({
       longitude: -118.2437,
       latitude: 34.0522
     })
-
-    if (location[0].country == 'United States') {
-      location[0].regionCode = this.getUsRegionCode(location[0].region, usStateCode);
+    // Select the first array item
+    location = location[0];
+    if (location.country == 'United States') {
+      location.regionCode = this.getUsRegionCode(location.region, usStateCode);
     }
     this.setState({ location });
   }
@@ -66,7 +67,7 @@ export default class MainScreen extends Component {
         <Header location={this.state.location} />
         {/* <Text>{JSON.stringify(this.state.gps)}</Text> */}
         <Text>{JSON.stringify(this.state.location)}</Text>
-        <Main />
+        <Main location={this.state.location} />
       </View>
     );
   }
