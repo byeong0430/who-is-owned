@@ -7,7 +7,7 @@ export default class Header extends Component {
   makeAddr(loc) {
     let addr = 'Getting your address..';
     if (loc) {
-      const { name, street, city, regionCode, country } = loc[0];
+      const { name, street, city, regionCode, country } = loc;
       addr = `${name} ${street}, ${city}, ${regionCode}, ${country}`;
     }
     return addr;
