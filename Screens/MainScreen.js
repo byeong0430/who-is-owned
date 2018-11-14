@@ -16,7 +16,8 @@ export default class MainScreen extends Component {
     this.state = {
       gps: null,
       location: null,
-      errorMessage: null
+      errorMessage: null,
+      method: 'getLegislators'
     }
   }
 
@@ -66,8 +67,9 @@ export default class MainScreen extends Component {
       <View style={theme.mainScreen}>
         <Header location={this.state.location} />
         {/* <Text>{JSON.stringify(this.state.gps)}</Text> */}
-        <Text>{JSON.stringify(this.state.location)}</Text>
-        <Main location={this.state.location} />
+        {/* <Text>{JSON.stringify(this.state.location)}</Text> */}
+        <Main method={this.state.method}
+              location={this.state.location} />
       </View>
     );
   }
