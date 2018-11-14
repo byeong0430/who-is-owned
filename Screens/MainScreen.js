@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Platform, View, Text }
+import { Platform, View }
   from 'react-native';
 import { Constants, Location, Permissions }
   from 'expo';
 import * as theme from '../utils/theme';
-
 import Header from '../components/Header';
 import Main from '../components/Main';
 
@@ -68,8 +67,10 @@ export default class MainScreen extends Component {
         <Header location={this.state.location} />
         {/* <Text>{JSON.stringify(this.state.gps)}</Text> */}
         {/* <Text>{JSON.stringify(this.state.location)}</Text> */}
-        <Main method={this.state.method}
-              location={this.state.location} />
+        <Main
+          method={this.state.method}
+          location={this.state.location}
+        />
       </View>
     );
   }
