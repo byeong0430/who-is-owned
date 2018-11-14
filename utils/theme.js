@@ -26,25 +26,16 @@ export const mainScreen = {
 
 // Header
 export const headerContainer = {
-  ...debugBorder,
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexDirection: 'row',
-  flexWrap: 'wrap'
+  marginBottom: 20
 };
-export const headerLeft = {
-  ...debugBorder,
-  flex: 1,
-  flexDirection: 'column'
-}
 
-export const headerLeftText = {
-  textAlign: 'center'
-}
-
-export const headerRight = {
-  ...debugBorder,
-  flex: 4
+// Reference
+// https://react-native-training.github.io/react-native-elements/docs/0.19.1/lists.html#lefticon
+export const headerIcon = {
+  name: 'my-location',
+  style: {
+    fontSize: 50
+  }
 }
 
 // Main
