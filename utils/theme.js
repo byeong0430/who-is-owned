@@ -28,7 +28,6 @@ export const mainScreen = {
 export const headerContainer = {
   ...debugBorder,
   // Shrink to fit content
-  flexShrink: 1,
   justifyContent: 'center',
   alignItems: 'center',
   flexDirection: 'row',
@@ -51,6 +50,5 @@ export const headerRight = {
 
 // Main
 export const mainContainer = {
-  ...debugBorder,
-  flexGrow: 1
+  ...debugBorder
 }
