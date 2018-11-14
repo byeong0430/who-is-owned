@@ -3,7 +3,7 @@ import { View, ScrollView, Text } from 'react-native';
 import * as theme from '../utils/theme';
 import * as openSecret from '../utils/api/openSecret';
 import { Icon } from 'react-native-elements';
-import FontAwesome, { Icons } from 'react-native-fontawesome';
+import { Ionicons } from '@expo/vector-icons';
 
 export default class Main extends Component {
   constructor(props) {
@@ -51,7 +51,12 @@ export default class Main extends Component {
               </View>
               {/* Footer */}
               <View style={theme.profileFooter}>
-                <FontAwesome>{Icons.chevronLeft}</FontAwesome>
+                <Ionicons name="logo-facebook"
+                          size={32} color="blue" />
+                <Ionicons name="logo-twitter"
+                          size={32} color="blue" />
+                <Ionicons name="logo-youtube"
+                          size={32} color='red' />
               </View>
             </View>
           );
