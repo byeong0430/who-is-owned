@@ -27,13 +27,9 @@ export default class Main extends Component {
 
   renderFields(items) {
     if (items) {
-      return items.legislator.map((item, index) => {
-        return(
-          <Text key={`item_${index}`}>
-            {item['@attributes'].firstlast}
-          </Text>
-        );
-      })
+      return items.legislator.map((item, index) => (
+        <Text key={`item_${index}`}>{item['@attributes'].firstlast}</Text>
+      ));
     }
   }
 
