@@ -32,7 +32,8 @@ export const headerContainer = {
 // Reference
 // https://react-native-training.github.io/react-native-elements/docs/0.19.1/lists.html#lefticon
 export const headerIcon = {
-  name: 'my-location',
+  name: 'edit-location',
+  type: 'material',
   style: {
     fontSize: 50
   }
