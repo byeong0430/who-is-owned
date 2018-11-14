@@ -27,7 +27,6 @@ export const mainScreen = {
 // Header
 export const headerContainer = {
   ...debugBorder,
-  // Shrink to fit content
   justifyContent: 'center',
   alignItems: 'center',
   flexDirection: 'row',
@@ -51,4 +50,27 @@ export const headerRight = {
 // Main
 export const mainContainer = {
   ...debugBorder
+}
+
+export const profileHeader = {
+  ...debugBorder,
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'row',
+  flexWrap: 'wrap'
+}
+
+export const profileHeaderLeft = {
+  ...debugBorder,
+  flex: 1
+}
+
+export const profileHeaderRight = {
+  ...debugBorder,
+  flex: 4
+}
+
+export const profileFooter = {
+  ...debugBorder,
+  flexDirection: 'row'
 }
