@@ -20,12 +20,15 @@ export default class Header extends Component {
   render() {
     return (
       <View>
-        <List style={theme.headerContainer}>
+        <List containerStyle={theme.headerContainer}>
           <ListItem
+            containerStyle={{ borderBottomWidth: 0 }}
             leftIcon={theme.headerIcon}
             title={this.makeAddr(this.props.location).addr1}
             subtitle={this.makeAddr(this.props.location).addr2}
-            leftIconOnPress={() => { console.log('test') }}
+            leftIconOnPress={
+              () => this.props.navigation.navigate('SideMenu')
+            }
             hideChevron
           />
         </List>
