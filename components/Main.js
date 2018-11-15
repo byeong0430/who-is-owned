@@ -58,7 +58,11 @@ export default class Main extends Component {
               {/* Header */}
               <View style={theme.profileHeader}>
                 <View style={theme.profileHeaderLeft}>
-                  <Icon name='tag-faces' />
+                  <Icon
+                    raised
+                    name='user'
+                    type='font-awesome'
+                  />
                 </View>
                 <View style={theme.profileHeaderRight}>
                   <Text>{profileHeader}</Text>
