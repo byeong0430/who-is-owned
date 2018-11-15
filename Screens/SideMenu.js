@@ -19,13 +19,7 @@ export default class SideMenu extends Component {
 
   render() {
     return (
-      <View style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderColor: 'blue',
-        borderWidth: 1
-      }}>
+      <View style={theme.sideMenuContainer}>
         <Text>Details Screen</Text>
       </View>
     );
