@@ -8,12 +8,12 @@ export const RootStack = createStackNavigator(
     SideMenu: SideMenu,
   },
   {
+    initialRouteName: 'Home',
     cardStyle: {
       backgroundColor: 'transparent',
       elevation: 0,
       shadowOpacity: 0
     },
-    initialRouteName: 'Home',
     navigationOptions: {
       gesturesEnabled: false,
       headerStyle: {
@@ -22,6 +22,7 @@ export const RootStack = createStackNavigator(
       },
       headerTransparent: true
     },
+    // Animated transition between screens
     transitionConfig: () => {
       return {
         transitionSpec: {
