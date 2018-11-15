@@ -86,3 +86,8 @@ export const profileFooter = {
   ...debugBorder,
   flexDirection: 'row'
 }
+
+export const socialIcon = {
+  width: 40,
+  height: 40
+}
