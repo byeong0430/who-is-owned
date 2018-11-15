@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import { Platform, View, Text }
+import { Platform, View }
   from 'react-native';
 import { Constants, Location, Permissions }
   from 'expo';
 import * as theme from '../utils/theme';
-
 import Header from '../components/Header';
 import Main from '../components/Main';
 
 const usStateCode = require('../utils/json/usStateCode.json');
 
-export default class MainScreen extends Component {
+export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -62,14 +61,30 @@ export default class MainScreen extends Component {
 
   getUsRegionCode = (state, stateCodeJson) => stateCodeJson[state];
 
+  makeAddr = loc => {
+    let addr1 = 'Getting your address..';
+    let addr2 = null;
+
+    if (loc) {
+      const { name, street, city, regionCode, country } = loc;
+      addr1 = `${name} ${street}`;
+      addr2 = `${city}, ${regionCode}, ${country}`;
+    }
+
+    return { addr1, addr2 };
+  }
+
   render() {
     return (
       <View style={theme.mainScreen}>
-        <Header location={this.state.location} />
-        {/* <Text>{JSON.stringify(this.state.gps)}</Text> */}
-        {/* <Text>{JSON.stringify(this.state.location)}</Text> */}
-        <Main method={this.state.method}
-              location={this.state.location} />
+        <Header
+          location={this.state.location}
+          navigation={this.props.navigation}
+        />
+        <Main
+          method={this.state.method}
+          location={this.state.location}
+        />
       </View>
     );
   }

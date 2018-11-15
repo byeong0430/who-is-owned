@@ -13,12 +13,16 @@ export const modal = Platform.select({
   }
 });
 
-// Main screen
+// SideMenu
+export const sideMenuBackBtn = {
+  marginLeft: 15
+};
+
+// Home
 export const mainScreen = {
   ...debugBorder,
   margin: 15,
-  // Extra margin on top
-  marginTop: 24,
+  marginTop: 25,
   // Fill up the whole screen
   flex: 1,
   flexDirection: 'column'
@@ -26,25 +30,21 @@ export const mainScreen = {
 
 // Header
 export const headerContainer = {
-  ...debugBorder,
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexDirection: 'row',
-  flexWrap: 'wrap'
+  marginBottom: 20,
+  borderTopWidth: 0,
+  marginTop: 0,
+  marginBottom: 0
 };
-export const headerLeft = {
-  ...debugBorder,
-  flex: 1,
-  flexDirection: 'column'
-}
 
-export const headerLeftText = {
-  textAlign: 'center'
-}
-
-export const headerRight = {
-  ...debugBorder,
-  flex: 4
+// Reference
+// https://react-native-training.github.io/react-native-elements/docs/0.19.1/lists.html#lefticon
+export const headerIcon = {
+  name: 'edit-location',
+  type: 'material',
+  style: {
+    fontSize: 50,
+    borderColor: 'transparent'
+  }
 }
 
 // Main

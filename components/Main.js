@@ -27,7 +27,7 @@ export default class Main extends Component {
     }
   }
 
-  renderFields(key, items) {
+  renderFields = (key, items) => {
     if (items) {
       return items[key].map((item, index) => {
         if (index === 0) {
@@ -51,12 +51,18 @@ export default class Main extends Component {
               </View>
               {/* Footer */}
               <View style={theme.profileFooter}>
-                <Ionicons name="logo-facebook"
-                          size={32} color="blue" />
-                <Ionicons name="logo-twitter"
-                          size={32} color="blue" />
-                <Ionicons name="logo-youtube"
-                          size={32} color='red' />
+                <Ionicons
+                  name="logo-facebook"
+                  size={32} color="blue"
+                />
+                <Ionicons
+                  name="logo-twitter"
+                  size={32} color="blue"
+                />
+                <Ionicons
+                  name="logo-youtube"
+                  size={32} color='red'
+                />
               </View>
             </View>
           );
