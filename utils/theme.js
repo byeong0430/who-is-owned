@@ -13,10 +13,20 @@ export const modal = Platform.select({
   }
 });
 
+
 // SideMenu
 export const sideMenuBackBtn = {
   marginLeft: 15
 };
+
+export const sideMenuContainer = {
+  flex: 1,
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderColor: 'blue',
+  borderWidth: 1
+};
+
 
 // Home
 export const mainScreen = {
@@ -27,6 +37,7 @@ export const mainScreen = {
   flex: 1,
   flexDirection: 'column'
 };
+
 
 // Header
 export const headerContainer = {
@@ -46,6 +57,7 @@ export const headerIcon = {
     borderColor: 'transparent'
   }
 }
+
 
 // Main
 export const mainContainer = {
