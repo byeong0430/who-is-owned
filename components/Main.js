@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text } from 'react-native';
-import * as theme from '../utils/theme';
+import * as mainStyle from '../utils/stylesheets/main';
 import * as openSecret from '../utils/api/openSecret';
-import { Icon } from 'react-native-elements';
+import { Icon, SocialIcon } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 
 export default class Main extends Component {
@@ -27,6 +27,25 @@ export default class Main extends Component {
     }
   }
 
+  renderSocialIconBtns = item => {
+    const socialMedias = ['facebook_id', 'twitter_id', 'youtube_url'];
+
+    return socialMedias.map(socialMedia => {
+      const socialMediaType = socialMedia.split('_')[0];
+      if (item[socialMedia]) {
+        return (
+          <SocialIcon
+            key={socialMediaType}
+            raised={true}
+            type={socialMediaType}
+            style={mainStyle.socialIcon}
+            onPress={() => { console.log('test') }}
+          />
+        );
+      }
+    })
+  }
+
   renderFields = (key, items) => {
     if (items) {
       return items[key].map((item, index) => {
@@ -35,14 +54,20 @@ export default class Main extends Component {
           console.log(item['@attributes']);
           const profileHeader = `${firstlast} (${party}) - first elected in ${first_elected}`;
           return (
-            <View key={`view_${index}`} style={theme.profileContainer}>
+            <View key={`view_${index}`} style={mainStyle.profileContainer}>
               {/* Header */}
-              <View style={theme.profileHeader}>
-                <View style={theme.profileHeaderLeft}>
-                  <Icon name='tag-faces' />
+              <View style={mainStyle.profileHeader}>
+                <View style={mainStyle.profileHeaderLeft}>
+                  <Icon
+                    raised
+                    name='user'
+                    type='font-awesome'
+                  />
                 </View>
-                <View style={theme.profileHeaderRight}>
-                  <Text>{profileHeader}</Text>
+                <View style={mainStyle.profileHeaderRight}>
+                  <Text style={mainStyle.profileHederRightText}>
+                    {profileHeader}
+                  </Text>
                 </View>
               </View>
               {/* Main */}
@@ -50,19 +75,8 @@ export default class Main extends Component {
                 <Text>test1</Text>
               </View>
               {/* Footer */}
-              <View style={theme.profileFooter}>
-                <Ionicons
-                  name="logo-facebook"
-                  size={32} color="blue"
-                />
-                <Ionicons
-                  name="logo-twitter"
-                  size={32} color="blue"
-                />
-                <Ionicons
-                  name="logo-youtube"
-                  size={32} color='red'
-                />
+              <View style={mainStyle.profileFooter}>
+                {this.renderSocialIconBtns(item['@attributes'])}
               </View>
             </View>
           );
@@ -73,7 +87,7 @@ export default class Main extends Component {
 
   render() {
     return (
-      <ScrollView style={theme.mainContainer}>
+      <ScrollView style={mainStyle.mainContainer}>
         {this.renderFields('legislator', this.state.apiResults)}
       </ScrollView>
     )

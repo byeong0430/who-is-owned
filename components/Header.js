@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import * as theme from '../utils/theme';
+import * as headerStyle from '../utils/stylesheets/header';
 import { List, ListItem } from 'react-native-elements';
 
 export default class Header extends Component {
@@ -20,10 +20,10 @@ export default class Header extends Component {
   render() {
     return (
       <View>
-        <List containerStyle={theme.headerContainer}>
+        <List containerStyle={headerStyle.headerContainer}>
           <ListItem
             containerStyle={{ borderBottomWidth: 0 }}
-            leftIcon={theme.headerIcon}
+            leftIcon={headerStyle.headerIcon}
             title={this.makeAddr(this.props.location).addr1}
             subtitle={this.makeAddr(this.props.location).addr2}
             leftIconOnPress={
