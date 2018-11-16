@@ -35,6 +35,6 @@ export const profileFooter = {
 }
 
 export const socialIcon = {
-  width: 40,
-  height: 40
+  width: 27,
+  height: 27
 }
