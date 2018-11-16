@@ -3,7 +3,7 @@ import { Platform, View }
   from 'react-native';
 import { Constants, Location, Permissions }
   from 'expo';
-import * as theme from '../utils/theme';
+import * as homeStyle from '../utils/stylesheets/home';
 import Header from '../components/Header';
 import Main from '../components/Main';
 
@@ -76,7 +76,7 @@ export default class Home extends Component {
 
   render() {
     return (
-      <View style={theme.mainScreen}>
+      <View style={homeStyle.mainScreen}>
         <Header
           location={this.state.location}
           navigation={this.props.navigation}
