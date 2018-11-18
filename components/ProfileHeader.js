@@ -21,7 +21,7 @@ export default class ProfileHeader extends Component {
       <View style={profileHeaderStyle.profileHeader}>
         <View style={profileHeaderStyle.avatarContainer}>
           <Avatar
-            medium
+            small
             rounded
             title={party}
             overlayContainerStyle={{ backgroundColor: partyColor }}
