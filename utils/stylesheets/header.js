@@ -18,7 +18,7 @@ export const headerIcon = {
     fontSize: vars.bigIconSize,
     borderColor: 'transparent',
     color: 'white',
-    marginRight: 10
+    marginLeft: 5
   }
 }
 
