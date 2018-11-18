@@ -26,7 +26,7 @@ export const RootStack = createStackNavigator(
     transitionConfig: () => {
       return {
         transitionSpec: {
-          duration: 100,
+          duration: 200,
         },
 
         screenInterpolator: sceneProps => {
