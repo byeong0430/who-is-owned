@@ -94,6 +94,7 @@ export default class Main extends Component {
             raised={true}
             type={socialMediaType}
             style={mainStyle.socialIcon}
+            iconSize={17}
             onPress={() => { console.log('test') }}
           />
         );
