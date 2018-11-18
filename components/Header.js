@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import * as headerStyle from '../utils/stylesheets/header';
 import { List, ListItem } from 'react-native-elements';
 
-export default class Header extends Component {
+export default class MainHeader extends Component {
   makeAddr = loc => {
     let addr1 = 'Getting your address..';
     let addr2 = null;
