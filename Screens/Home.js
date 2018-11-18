@@ -4,7 +4,7 @@ import { Platform, View }
 import { Constants, Location, Permissions }
   from 'expo';
 import * as homeStyle from '../utils/stylesheets/home';
-import Header from '../components/Header';
+import MainHeader from '../components/Header';
 import Main from '../components/Main';
 
 const usStateCode = require('../utils/json/usStateCode.json');
@@ -77,7 +77,7 @@ export default class Home extends Component {
   render() {
     return (
       <View style={homeStyle.mainScreen}>
-        <Header
+        <MainHeader
           location={this.state.location}
           navigation={this.props.navigation}
         />

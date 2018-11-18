@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import * as headerStyle from '../utils/stylesheets/header';
 import { List, ListItem } from 'react-native-elements';
 
-export default class Header extends Component {
+export default class MainHeader extends Component {
   makeAddr = loc => {
     let addr1 = 'Getting your address..';
     let addr2 = null;
@@ -24,12 +24,15 @@ export default class Header extends Component {
           <ListItem
             containerStyle={{ borderBottomWidth: 0 }}
             leftIcon={headerStyle.headerIcon}
+            leftIconUnderlayColor='transparent'
             title={this.makeAddr(this.props.location).addr1}
             subtitle={this.makeAddr(this.props.location).addr2}
-            leftIconOnPress={
+            titleStyle={headerStyle.title}
+            subtitleStyle={headerStyle.subTitle}
+            chevronColor='white'
+            onPressRightIcon={
               () => this.props.navigation.navigate('SideMenu')
             }
-            hideChevron
           />
         </List>
       </View>
