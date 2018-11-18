@@ -17,7 +17,7 @@ export default class ProfileHeader extends Component {
             raised={true}
             type={socialMediaType}
             style={socialIconBtnStyle.socialIcon}
-            iconSize={20}
+            iconSize={socialIconBtnStyle.iconSize}
             onPress={() => { console.log('test') }}
           />
         );
