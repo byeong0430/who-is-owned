@@ -13,7 +13,7 @@ export default class App extends Component {
 
   componentDidMount = async () => {
     await Font.loadAsync({
-      'slabo': require('./assets/fonts/Merriweather-Regular.ttf')
+      'fjallaRegular': require('./assets/fonts/FjallaOne-Regular.ttf')
     });
 
     this.setState({ fontLoaded: true });
