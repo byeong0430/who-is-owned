@@ -10,7 +10,7 @@ export default class SideMenu extends Component {
       headerLeft: (
         <Icon
           iconStyle={sidemenuStyle.sideMenuBackBtn}
-          name='arrow-back'
+          name='keyboard-arrow-left'
           onPress={() => navigation.navigate('Home')}
         />
       )
