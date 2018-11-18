@@ -8,8 +8,9 @@ export const redColor = '#C02F1D';
 export const mainFont = 'fjallaRegular';
 export const bigIconSize = 40;
 export const mediumIconSize = 30;
-export const smallIconSize = 20;
+export const smallIconSize = 22;
 export const bigFontSize = 22;
+export const mediumFontSize = 18;
 export const smallFontSize = 13;
 
 export const debugBorder = {
