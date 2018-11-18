@@ -1,7 +1,16 @@
 import { Constants } from 'expo';
 import { Platform } from 'react-native';
 
-export const paraFont = 'slabo';
+// 5 levels of blue colours from lightest to darkest
+// Reference: http://paletton.com/#uid=13F0u0kvJEBjEKwpjGCE2tqFFmS
+export const themeColors = ['#5D8CD2','#3872C8','#135AC2','#0A449B','#073578'];
+export const redColor = '#C02F1D';
+export const mainFont = 'fjallaRegular';
+export const bigIconSize = 40;
+export const mediumIconSize = 30;
+export const smallIconSize = 20;
+export const bigFontSize = 22;
+export const smallFontSize = 13;
 
 export const debugBorder = {
   borderColor: 'blue',
