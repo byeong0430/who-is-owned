@@ -24,12 +24,15 @@ export default class Header extends Component {
           <ListItem
             containerStyle={{ borderBottomWidth: 0 }}
             leftIcon={headerStyle.headerIcon}
+            leftIconUnderlayColor='transparent'
             title={this.makeAddr(this.props.location).addr1}
             subtitle={this.makeAddr(this.props.location).addr2}
-            leftIconOnPress={
+            titleStyle={headerStyle.title}
+            subtitleStyle={headerStyle.subTitle}
+            chevronColor='white'
+            onPressRightIcon={
               () => this.props.navigation.navigate('SideMenu')
             }
-            hideChevron
           />
         </List>
       </View>
