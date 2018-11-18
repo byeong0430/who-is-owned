@@ -8,12 +8,11 @@ export const profileHeader = {
 export const avatarContainer = {
   flex: 1,
   justifyContent: 'center',
-  alignItems: 'center',
+  alignItems: 'center'
 }
 
 export const textContainer = {
-  flex: 5,
-  marginLeft: 5
+  flex: 5
 }
 
 export const headerRightText = {
