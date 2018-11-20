@@ -4,8 +4,8 @@ import { Platform, View }
 import { Constants, Location, Permissions }
   from 'expo';
 import * as homeStyle from '../utils/stylesheets/home';
-import MainHeader from '../components/Header';
-import Main from '../components/Main';
+import MainHeader from '../components/home/Header';
+import Main from '../components/home/Main';
 
 const usStateCode = require('../utils/json/usStateCode.json');
 
