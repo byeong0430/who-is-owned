@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { SocialIcon } from 'react-native-elements';
-import * as socialIconBtnStyle from '../utils/stylesheets/socialiconbtns';
+import * as socialIconBtnStyle from '../../utils/stylesheets/socialiconbtns';
 
 export default class ProfileHeader extends Component {
   renderSocialIconBtns = item => {

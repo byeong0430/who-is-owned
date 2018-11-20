@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text } from 'react-native';
-import * as mainStyle from '../utils/stylesheets/main';
-import * as openSecret from '../utils/api/openSecret';
+import * as mainStyle from '../../utils/stylesheets/main';
+import * as openSecret from '../../utils/api/openSecret';
 import ProfileHeader from './ProfileHeader';
 import SocialIconBtns from './SocialIconBtns';
 
