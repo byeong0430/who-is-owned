@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, TextInput } from 'react-native';
+import { ScrollView, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 import * as sidemenuStyle from '../utils/stylesheets/sidemenu';
 import axios from 'axios';
@@ -45,13 +45,21 @@ export default class SideMenu extends Component {
   renderPlaces = () => {
     if (this.state.result) {
       return this.state.result.map((item, index) => {
+        const {lat, lng} = item._geoloc;
         const streetName = (item.locale_names) ? item.locale_names[0] : null;
         const city = (item.city) ? item.city[0] : null;
         const county = (item.county) ? item.county[0] : null;
         const country = (item.country) ? item.country : null;
         const address = [streetName, city, county, country].filter(item => item !== null).join(', ');
         return (
-          <Text key={`test_${index}`}>{`${address}`}</Text>
+          <TouchableOpacity
+            onPress={()=>{this.props.screenProps.updateLoc(lat, lng)}}
+            style={sidemenuStyle.sideMenuResult}
+            key={`test_${index}`}
+            underlayColor='white'
+          >
+            <Text>{`${address}`}</Text>
+          </TouchableOpacity>
         );
       })
     }
@@ -61,7 +69,7 @@ export default class SideMenu extends Component {
     return (
       <View style={sidemenuStyle.sideMenuContainer}>
         <TextInput
-          style={{ width: 60, height: 40, borderColor: 'gray', borderWidth: 1 }}
+          style={sidemenuStyle.sideMenuInput}
           onChangeText={query => this.loadPlaces(query)}
           value={this.state.query}
         />
