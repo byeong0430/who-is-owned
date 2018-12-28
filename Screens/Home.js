@@ -7,7 +7,7 @@ import * as homeStyle from '../utils/stylesheets/home';
 import MainHeader from '../components/home/Header';
 import Main from '../components/home/Main';
 
-const usStateCode = require('../utils/json/usStateCode.json');
+const usStateCode = require('../utils/data/usStateCode.json');
 
 export default class Home extends Component {
   constructor(props) {
