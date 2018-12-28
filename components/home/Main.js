@@ -127,8 +127,8 @@ export default class Main extends Component {
   render() {
     return (
       <ScrollView style={mainStyle.mainContainer}>
-        {/* {this.renderFields('legislator', this.state.apiResults)} */}
-        {this.renderFields('legislator', examples)}
+        {this.renderFields('legislator', this.state.apiResults)}
+        {/* {this.renderFields('legislator', examples)} */}
       </ScrollView>
     )
   }
