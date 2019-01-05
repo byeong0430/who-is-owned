@@ -106,7 +106,6 @@ export default class Main extends Component {
     if (items) {
       return items[key].map((item, index) => {
         if (index === 0 || index === 1) {
-          console.log(item['@attributes']);
           return (
             <View key={`view_${index}`} style={mainStyle.profileContainer}>
               {/* Header */}
