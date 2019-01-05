@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 
 import * as homeStyle from '../utils/stylesheets/home';
-import MainHeader from '../components/home/Header';
+import MainHeader from '../components/home/MainHeader';
 import Main from '../components/home/Main';
 
 export default class Home extends Component {
