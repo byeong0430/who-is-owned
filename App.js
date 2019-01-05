@@ -79,6 +79,7 @@ export default class App extends Component {
   render() {
     return (
       this.state.fontLoaded ? <RootStack screenProps={{
+        iniGps: this.state.iniGps,
         updateLoc: this.updateLoc,
         location: this.state.location
       }} /> : null
