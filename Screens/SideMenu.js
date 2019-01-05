@@ -29,23 +29,34 @@ export default class SideMenu extends Component {
   };
 
   loadPlaces = async query => {
+    const { iniGps } = this.props.screenProps;
     this.setState({ query });
+
     let result = await axios.post(
       'https://places-dsn.algolia.net/1/places/query',
       {
         query,
         language: 'en',
-        hitsPerPage: 10
+        hitsPerPage: 10,
+        aroundLatLng: iniGps
+          ? `${iniGps.coords.latitude},${iniGps.coords.longitude}`
+          : undefined
       }
     );
     result = result.data.hits;
     this.setState({ result });
   }
 
+  updateAndReturnToHome = (lat, lng) => {
+    // Update location
+    this.props.screenProps.updateLoc(lat, lng);
+    this.props.navigation.navigate('Home');
+  }
+
   renderPlaces = () => {
     if (this.state.result) {
       return this.state.result.map((item, index) => {
-        const {lat, lng} = item._geoloc;
+        const { lat, lng } = item._geoloc;
         const streetName = (item.locale_names) ? item.locale_names[0] : null;
         const city = (item.city) ? item.city[0] : null;
         const county = (item.county) ? item.county[0] : null;
@@ -53,7 +64,7 @@ export default class SideMenu extends Component {
         const address = [streetName, city, county, country].filter(item => item !== null).join(', ');
         return (
           <TouchableOpacity
-            onPress={()=>{this.props.screenProps.updateLoc(lat, lng)}}
+            onPress={() => { this.updateAndReturnToHome(lat, lng) }}
             style={sidemenuStyle.sideMenuResult}
             key={`test_${index}`}
             underlayColor='white'
