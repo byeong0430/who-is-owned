@@ -18,7 +18,7 @@ export default class MainHeader extends Component {
   }
 
   constructAddr = (array, joiner) => {
-    const fullStr = array.filter(item => item !== null || item !== undefined);
+    const fullStr = array.filter(item => item !== null && item !== undefined);
     return fullStr.join(joiner);
   }
 
