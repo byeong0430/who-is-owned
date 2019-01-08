@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import * as headerStyle from '../utils/stylesheets/header';
+import * as headerStyle from '../../utils/stylesheets/header';
 import { List, ListItem } from 'react-native-elements';
 
 export default class MainHeader extends Component {
@@ -10,11 +10,16 @@ export default class MainHeader extends Component {
 
     if (loc) {
       const { name, street, city, regionCode, country } = loc;
-      addr1 = `${name} ${street}`;
-      addr2 = `${city}, ${regionCode}, ${country}`;
+      addr1 = this.constructAddr([name, street], ' ');
+      addr2 = this.constructAddr([city, regionCode, country], ', ');
     }
 
     return { addr1, addr2 };
+  }
+
+  constructAddr = (array, joiner) => {
+    const fullStr = array.filter(item => item !== null && item !== undefined);
+    return fullStr.join(joiner);
   }
 
   render() {

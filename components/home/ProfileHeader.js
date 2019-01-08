@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Avatar } from 'react-native-elements';
 
-import * as profileHeaderStyle from '../utils/stylesheets/profileheader';
-import * as vars from '../utils/stylesheets/vars';
+import * as profileHeaderStyle from '../../utils/stylesheets/profileheader';
+import * as vars from '../../utils/stylesheets/vars';
 
 export default class ProfileHeader extends Component {
   render() {
@@ -21,7 +21,7 @@ export default class ProfileHeader extends Component {
       <View style={profileHeaderStyle.profileHeader}>
         <View style={profileHeaderStyle.avatarContainer}>
           <Avatar
-            medium
+            small
             rounded
             title={party}
             overlayContainerStyle={{ backgroundColor: partyColor }}
