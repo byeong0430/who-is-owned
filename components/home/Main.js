@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { ScrollView, Linking } from 'react-native';
+import { Card, ListItem, Avatar } from 'react-native-elements';
 import * as mainStyle from '../../utils/stylesheets/main';
 import * as openSecret from '../../utils/api/openSecret';
-import ProfileHeader from './ProfileHeader';
-import SocialIconBtns from './SocialIconBtns';
+import ProfileHeader from '../profile/ProfileHeader';
+import ProfileMain from '../profile/ProfileMain';
+import SocialIconBtns from '../profile/SocialIconBtns';
 
 const examples = {
   'legislator': [
@@ -82,8 +84,6 @@ export default class Main extends Component {
       legiSummary = legiSummary.legislator;
 
       this.setState({ legiSummary });
-
-
     }
   }
 
@@ -112,16 +112,40 @@ export default class Main extends Component {
       return items.map((item, index) => {
         if (index === 0 || index === 1) {
           return (
-            <View key={`view_${index}`} style={mainStyle.profileContainer}>
-              {/* Header */}
+            <Card
+              key={`view_${index}`}
+              containerStyle={{ padding: 0 }}
+            >
               <ProfileHeader attributes={item['@attributes']} />
-              {/* Main */}
-              <View>
-                <Text>test1</Text>
-              </View>
-              {/* Footer */}
-              <SocialIconBtns attributes={item['@attributes']} />
-            </View>
+              {/*
+              <ListItem
+                hideChevron
+                leftIcon={{
+                  name: 'home'
+                }}
+                underlayColor='lightgrey'
+                title='http://lamalfa.house.gov'
+                onPress={() => Linking.openURL('http://lamalfa.house.gov')}
+              />
+              <ListItem
+                hideChevron
+                containerStyle={{ borderBottomWidth: 0 }}
+                title='First Year Elected'
+                subtitle='2012'
+              />
+              <ListItem
+                hideChevron
+                containerStyle={{ borderBottomWidth: 0 }}
+                title='Born'
+                subtitle='1970-07-02 (age 58 years)'
+              />
+              <ListItem
+                hideChevron
+                containerStyle={{ margin: 0, borderBottomWidth: 0 }}
+                title='Congress Office'
+                subtitle='322 Cannon House Office Building'
+              /> */}
+            </Card>
           );
         }
       });
@@ -132,8 +156,49 @@ export default class Main extends Component {
     return (
       <ScrollView style={mainStyle.mainContainer}>
         {this.renderFields(this.state.legiSummary)}
-        {/* {this.renderFields(examples)} */}
-      </ScrollView>
+        <Card containerStyle={{ padding: 0 }}>
+          <ListItem
+            hideChevron
+            avatar={
+              <Avatar
+                small
+                rounded
+                title='R'
+                overlayContainerStyle={{ backgroundColor: 'red' }}
+              />
+            }
+            title='Doug LaMalfa'
+            subtitle='First elected in 2012'
+          />
+          <ListItem
+            hideChevron
+            leftIcon={{
+              name: 'home'
+            }}
+            underlayColor='lightgrey'
+            title='http://lamalfa.house.gov'
+            onPress={() => Linking.openURL('http://lamalfa.house.gov')}
+          />
+          <ListItem
+            hideChevron
+            containerStyle={{ borderBottomWidth: 0 }}
+            title='First Year Elected'
+            subtitle='2012'
+          />
+          <ListItem
+            hideChevron
+            containerStyle={{ borderBottomWidth: 0 }}
+            title='Born'
+            subtitle='1970-07-02 (age 58 years)'
+          />
+          <ListItem
+            hideChevron
+            containerStyle={{ margin: 0, borderBottomWidth: 0 }}
+            title='Congress Office'
+            subtitle='322 Cannon House Office Building'
+          />
+        </Card>
+      </ScrollView >
     )
   }
 }
