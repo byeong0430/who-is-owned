@@ -12,7 +12,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       fontLoaded: false,
-      iniGps: null,
+      gps: null,
       location: null,
       errorMessage: null
     };
@@ -40,11 +40,12 @@ export default class App extends Component {
     }
 
     // Get GPS info
-    const iniGps = await Location.getCurrentPositionAsync({});
-    this.setState({ iniGps });
+    const gps = await Location.getCurrentPositionAsync({});
 
     // Parse longitude and latitude and get current address
-    let { longitude, latitude } = iniGps.coords;
+    let { longitude, latitude } = gps.coords;
+
+    this.setState({ gps: { latitude, longitude } });
 
     // Debugging with initial location set to L.A.
     longitude = -118.2437;
@@ -71,7 +72,11 @@ export default class App extends Component {
       location.regionCode = this.getUsRegionCode(location.region, usStateCode);
     }
 
-    this.setState({ location });
+    this.setState({
+      ...this.state,
+      gps: { latitude, longitude },
+      location
+    })
   }
 
   getUsRegionCode = (state, stateCodeJson) => stateCodeJson[state];
@@ -79,7 +84,7 @@ export default class App extends Component {
   render() {
     return (
       this.state.fontLoaded ? <RootStack screenProps={{
-        iniGps: this.state.iniGps,
+        gps: this.state.gps,
         updateLoc: this.updateLoc,
         location: this.state.location
       }} /> : null

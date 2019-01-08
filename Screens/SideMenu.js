@@ -29,7 +29,7 @@ export default class SideMenu extends Component {
   };
 
   loadPlaces = async query => {
-    const { iniGps } = this.props.screenProps;
+    const { gps } = this.props.screenProps;
     this.setState({ query });
 
     let result = await axios.post(
@@ -38,8 +38,8 @@ export default class SideMenu extends Component {
         query,
         language: 'en',
         hitsPerPage: 10,
-        aroundLatLng: iniGps
-          ? `${iniGps.coords.latitude},${iniGps.coords.longitude}`
+        aroundLatLng: gps
+          ? `${gps.latitude},${gps.longitude}`
           : undefined
       }
     );
