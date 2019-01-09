@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, Linking } from 'react-native';
-import { SocialIcon, Icon } from 'react-native-elements';
+import { SocialIcon } from 'react-native-elements';
+import ContactIconBtns from './ContactIconBtns';
 import * as socialIconBtnStyle from '../../utils/stylesheets/socialiconbtns';
+
 
 export default class ProfileHeader extends Component {
   makeSocialMediaUrl = (smItems, smType) => {
@@ -31,7 +33,7 @@ export default class ProfileHeader extends Component {
               key={socialMediaType}
               raised={true}
               type={socialMediaType}
-              style={socialIconBtnStyle.socialIcon}
+              style={socialIconBtnStyle.footerIcon}
               iconSize={socialIconBtnStyle.iconSize}
               onPress={() => (
                 Linking.openURL(this.makeSocialMediaUrl(item, socialMedia))
@@ -57,13 +59,7 @@ export default class ProfileHeader extends Component {
           showsHorizontalScrollIndicator={false}
         >
           {this.renderSocialIconBtns(attributes)}
-          <Icon
-            name='phone-in-talk'
-            onPress={() => (
-              // Assume US (+1) for now
-              Linking.openURL(`tel:1 ${attributes.phone}`)
-            )}
-          />
+          <ContactIconBtns attributes={attributes} />
         </ScrollView>
       </View>
     );
