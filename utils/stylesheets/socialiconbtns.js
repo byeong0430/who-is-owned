@@ -1,14 +1,15 @@
 import * as vars from './vars';
 
 export const profileFooter = {
-  ...vars.debugBorder,
   flexDirection: 'row',
-  justifyContent: 'flex-end'
+  justifyContent: 'flex-start'
 }
 
 export const socialIcon = {
   width: vars.mediumIconSize,
-  height: vars.mediumIconSize
+  height: vars.mediumIconSize,
+  marginLeft: 0,
+  marginRight: 10
 }
 
 export const iconSize = vars.mediumFontSize;
