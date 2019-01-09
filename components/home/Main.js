@@ -48,7 +48,7 @@ export default class Main extends Component {
         return (
           <Card
             key={`view_${index}`}
-            containerStyle={{ padding: 0 }}
+            containerStyle={mainStyle.card}
           >
             <ProfileHeader attributes={item['@attributes']} />
             <ProfileMain attributes={item['@attributes']} />
