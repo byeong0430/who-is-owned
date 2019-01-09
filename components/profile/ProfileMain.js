@@ -26,13 +26,13 @@ export default class ProfileMain extends Component {
           hideChevron
           leftIcon={{ name: 'person', color: 'grey' }}
           containerStyle={{ borderBottomWidth: 0 }}
-          title='Born'
+          title='BORN'
           subtitle={`${this.formatDate(birthdate)} (${this.calculateAge(birthdate, '-')} years of age)`}
         />
         <ListItem
           hideChevron
           leftIcon={{ name: 'work', color: 'grey' }}
-          title='Congress Office'
+          title='CONGRESS OFFICE'
           subtitle={congress_office}
         />
       </View>
