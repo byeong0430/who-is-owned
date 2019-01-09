@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { ListItem, Avatar } from 'react-native-elements';
+import { Linking } from 'react-native';
+import { ListItem, Avatar, Icon } from 'react-native-elements';
 import * as vars from '../../utils/stylesheets/vars';
 
 export default class ProfileHeader extends Component {
   render() {
-    const { firstlast, party } = this.props.attributes;
+    const { website, firstlast, party, first_elected } = this.props.attributes;
     let partyColor = '';
     if (party === 'R') {
       partyColor = vars.redColor;
@@ -16,7 +17,6 @@ export default class ProfileHeader extends Component {
 
     return (
       <ListItem
-        hideChevron
         avatar={
           <Avatar
             small
@@ -26,6 +26,14 @@ export default class ProfileHeader extends Component {
           />
         }
         title={firstlast}
+        subtitle={`First elected in ${first_elected}`}
+        rightIcon={
+          <Icon
+            onPress={() => Linking.openURL(website)}
+            name={'home'}
+            color='grey'
+          />
+        }
       />
     );
   }
