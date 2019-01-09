@@ -12,5 +12,9 @@ export const profileContainer = {
   paddingRight: 5,
   paddingBottom: 5,
   marginBottom: 10,
-  ...vars.debugBorder
+}
+
+export const card = {
+  padding: 0,
+  borderRadius: 5
 }
