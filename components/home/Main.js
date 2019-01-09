@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, RefreshControl } from 'react-native';
 import { Card } from 'react-native-elements';
 import * as mainStyle from '../../utils/stylesheets/main';
 import * as openSecret from '../../utils/api/openSecret';
@@ -11,24 +11,34 @@ export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      legiSummary: null
+      legiSummary: null,
+      refreshing: false
     };
   }
 
+  getLegiSummary = async () => {
+    const { location, method } = this.props;
+    let legiSummary = await openSecret.fetchData({
+      verb: 'GET',
+      method,
+      id: location.regionCode
+    });
+    legiSummary = legiSummary.legislator;
+
+    this.setState({ legiSummary });
+  }
+
+  _onRefresh = async () => {
+    this.setState({ refreshing: true })
+    this.getLegiSummary();
+    this.setState({ refreshing: false })
+  }
+
   componentDidUpdate = async prevProps => {
-    const { method, location } = this.props;
-    if (location &&
+    if (this.props.location &&
       (this.props.location !== prevProps.location) ||
       (this.props.method !== prevProps.method)) {
-
-      let legiSummary = await openSecret.fetchData({
-        verb: 'GET',
-        method,
-        id: location.regionCode
-      });
-      legiSummary = legiSummary.legislator;
-
-      this.setState({ legiSummary });
+      this.getLegiSummary();
     }
   }
 
@@ -51,7 +61,15 @@ export default class Main extends Component {
 
   render() {
     return (
-      <ScrollView style={mainStyle.mainContainer}>
+      <ScrollView
+        style={mainStyle.mainContainer}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh}
+          />
+        }
+      >
         {this.renderFields(this.state.legiSummary)}
       </ScrollView>
     )
