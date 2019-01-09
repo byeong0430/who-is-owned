@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import {
+  ScrollView, View, Text, TextInput, TouchableOpacity
+} from 'react-native';
 import { Icon } from 'react-native-elements';
 import * as sidemenuStyle from '../utils/stylesheets/sidemenu';
 import axios from 'axios';
