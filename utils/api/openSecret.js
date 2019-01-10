@@ -16,24 +16,36 @@ export default class OpenSecret {
   }
 
   // Add additional parameters to default parameter object
-  addParams = paramObj => {
+  addParams = (method, paramObj) => {
     const newParams = { ...this.defaultParams };
     newParams.params = {
       ...newParams.params,
       ...paramObj,
-      method: 'getLegislators'
+      method
     };
 
     return newParams;
   }
 
   getLegislators = async params => {
-    const result = await axios.get(this.url, this.addParams(params));
+    const parameters = this.addParams('getLegislators', params);
+    const result = await axios.get(this.url, parameters);
 
     if (result.status !== 200) {
       throw new Error('Something went wrong..\nPlease try again later.');
     }
 
     return result.data.response.legislator;
+  }
+
+  getCandSummary = async params => {
+    const parameters = this.addParams('candSummary', params);
+    const result = await axios.get(this.url, parameters);
+
+    if (result.status !== 200) {
+      throw new Error('Something went wrong..\nPlease try again later.');
+    }
+
+    return result.data.response.summary['@attributes'];
   }
 }
