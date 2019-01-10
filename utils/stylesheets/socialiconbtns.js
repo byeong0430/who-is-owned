@@ -19,7 +19,7 @@ export const footerIcon = {
 
 export const iconTitle = {
   textAlign: 'center',
-  color: 'grey',
+  color: vars.greyColor,
   fontSize: vars.smallFontSize
 }
 
