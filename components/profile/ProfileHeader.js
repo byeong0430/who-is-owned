@@ -9,7 +9,7 @@ export default class ProfileHeader extends Component {
     if (party === 'R') {
       partyColor = vars.redColor;
     } else if (party === 'D') {
-      partyColor = vars.blueColor;
+      partyColor = vars.darkBlueColor;
     } else {
       partyColor = vars.darkGreyColor;
     }
