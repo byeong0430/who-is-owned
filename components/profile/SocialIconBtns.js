@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, ScrollView, Linking } from 'react-native';
 import { SocialIcon } from 'react-native-elements';
 import ContactIconBtns from './ContactIconBtns';
+import * as vars from '../../utils/stylesheets/vars';
 import * as socialIconBtnStyle from '../../utils/stylesheets/socialiconbtns';
 
 
@@ -52,7 +53,7 @@ export default class ProfileHeader extends Component {
 
     return (
       <View style={socialIconBtnStyle.profileFooter}>
-        <Text>Connect</Text>
+        <Text style={{ color: vars.greyColor }}>Connect</Text>
         <ScrollView
           horizontal={true}
           showsHorizontalScrollIndicator={false}
