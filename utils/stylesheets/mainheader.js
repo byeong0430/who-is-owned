@@ -6,7 +6,6 @@ export const headerContainer = {
   borderBottomWidth: 5,
   borderColor: vars.lightGreyColor,
   marginTop: 0,
-  marginBottom: 10,
   paddingLeft: 3
 };
 
@@ -18,7 +17,7 @@ export const headerIcon = {
   style: {
     fontSize: vars.bigIconSize,
     color: vars.blueColor,
-    marginLeft: 5
+    marginLeft: 10
   }
 }
 
