@@ -52,7 +52,7 @@ export default class ProfileHeader extends Component {
 
     return (
       <View style={socialIconBtnStyle.profileFooter}>
-        <Text>CONNECT</Text>
+        <Text>Connect</Text>
         <ScrollView
           horizontal={true}
           showsHorizontalScrollIndicator={false}
