@@ -26,6 +26,9 @@ export default class ProfileHeader extends Component {
         }
         title={firstlast}
         subtitle={`First elected in ${first_elected}`}
+        onPressRightIcon={
+          () => this.props.navigation.navigate('Detail')
+        }
       />
     );
   }
