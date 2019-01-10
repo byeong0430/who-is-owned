@@ -65,7 +65,6 @@ export default class Main extends Component {
   render() {
     return (
       <ScrollView
-        style={mainStyle.mainContainer}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
