@@ -47,7 +47,7 @@ export default class Main extends Component {
       return items.map((item, index) => {
         return (
           <Card
-            key={`view_${index}`}
+            key={`card_${index}`}
             containerStyle={mainStyle.card}
           >
             <ProfileHeader attributes={item['@attributes']} />

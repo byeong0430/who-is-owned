@@ -24,13 +24,12 @@ export default class ProfileHeader extends Component {
   renderSocialIconBtns = item => {
     const socialMedias = ['facebook_id', 'twitter_id', 'youtube_url'];
 
-    return socialMedias.map(socialMedia => {
+    return socialMedias.map((socialMedia, index) => {
       const socialMediaType = socialMedia.split('_')[0];
       if (item[socialMedia]) {
         return (
-          <View style={socialIconBtnStyle.iconBox}>
+          <View key={`sm_${index}`} style={socialIconBtnStyle.iconBox}>
             <SocialIcon
-              key={socialMediaType}
               raised={true}
               type={socialMediaType}
               style={socialIconBtnStyle.footerIcon}
