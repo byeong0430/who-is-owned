@@ -4,7 +4,7 @@ import * as vars from './vars';
 export const headerContainer = {
   borderTopWidth: 0,
   borderBottomWidth: 5,
-  borderColor: vars.lightGreyColor,
+  borderColor: vars.yellowColor,
   marginTop: 0,
   paddingLeft: 3
 };
