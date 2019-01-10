@@ -30,7 +30,7 @@ export default class MainHeader extends Component {
             containerStyle={{ borderBottomWidth: 0 }}
             leftIcon={headerStyle.headerIcon}
             leftIconUnderlayColor='transparent'
-            title={this.makeAddr(this.props.location).addr1}
+            title={this.makeAddr(this.props.location).addr1.toUpperCase()}
             subtitle={this.makeAddr(this.props.location).addr2}
             titleStyle={headerStyle.title}
             subtitleStyle={headerStyle.subTitle}
