@@ -12,12 +12,12 @@ export const headerContainer = {
 // Reference
 // https://react-native-training.github.io/react-native-elements/docs/0.19.1/lists.html#lefticon
 export const headerIcon = {
-  name: 'location-on',
+  name: 'location-city',
   type: 'material',
   style: {
     fontSize: vars.bigIconSize,
     color: vars.blueColor,
-    marginLeft: 10
+    marginLeft: 9
   }
 }
 
