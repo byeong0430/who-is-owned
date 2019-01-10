@@ -22,13 +22,12 @@ export const headerIcon = {
 }
 
 export const title = {
-  fontFamily: vars.mainFont,
+  fontFamily: vars.mainFontSerif,
   color: vars.darkGreyColor,
-  fontSize: vars.bigFontSize
+  fontSize: vars.mediumFontSize,
 };
 
 export const subTitle = {
-  fontFamily: vars.mainFont,
   color: vars.greyColor,
   fontSize: vars.smallFontSize
 };
