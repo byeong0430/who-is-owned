@@ -53,7 +53,10 @@ export default class Main extends Component {
             key={`card_${index}`}
             containerStyle={mainStyle.card}
           >
-            <ProfileHeader attributes={item['@attributes']} />
+            <ProfileHeader
+              attributes={item['@attributes']}
+              navigation={this.props.navigation}
+            />
             <ProfileMain attributes={item['@attributes']} />
             <SocialIconBtns attributes={item['@attributes']} />
           </Card>
