@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import { ScrollView, RefreshControl } from 'react-native';
 import { Card } from 'react-native-elements';
+
+// Stylesheet
 import * as mainStyle from '../../utils/stylesheets/main';
-import * as openSecret from '../../utils/api/openSecret';
+// API
+import OpenSecret from '../../utils/api/openSecret';
+// Components
 import ProfileHeader from '../profile/ProfileHeader';
 import ProfileMain from '../profile/ProfileMain';
 import SocialIconBtns from '../profile/SocialIconBtns';
+
+// Initiate OpenSecret class (API)
+const openSecret = new OpenSecret();
 
 export default class Main extends Component {
   constructor(props) {
@@ -17,13 +24,9 @@ export default class Main extends Component {
   }
 
   getLegiSummary = async () => {
-    const { location, method } = this.props;
-    let legiSummary = await openSecret.fetchData({
-      verb: 'GET',
-      method,
-      id: location.regionCode
+    const legiSummary = await openSecret.getLegislators({
+      id: this.props.location.regionCode
     });
-    legiSummary = legiSummary.legislator;
 
     this.setState({ legiSummary });
   }
