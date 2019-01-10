@@ -3,10 +3,11 @@ import * as vars from './vars';
 // Header
 export const headerContainer = {
   borderTopWidth: 0,
+  borderBottomWidth: 5,
+  borderColor: vars.lightGreyColor,
   marginTop: 0,
   marginBottom: 10,
-  paddingLeft: 3,
-  backgroundColor: vars.themeColors[0]
+  paddingLeft: 3
 };
 
 // Reference
@@ -16,20 +17,19 @@ export const headerIcon = {
   type: 'material',
   style: {
     fontSize: vars.bigIconSize,
-    borderColor: 'transparent',
-    color: 'white',
+    color: vars.blueColor,
     marginLeft: 5
   }
 }
 
 export const title = {
   fontFamily: vars.mainFont,
-  color: 'white',
+  color: vars.darkGreyColor,
   fontSize: vars.bigFontSize
 };
 
 export const subTitle = {
   fontFamily: vars.mainFont,
-  color: 'white',
+  color: vars.greyColor,
   fontSize: vars.smallFontSize
 };
