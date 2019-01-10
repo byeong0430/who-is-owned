@@ -19,6 +19,7 @@ export default class Home extends Component {
         />
         <Main
           location={this.props.screenProps.location}
+          navigation={this.props.navigation}
         />
       </View>
     );
