@@ -38,6 +38,17 @@ export default class OpenSecret {
     return result.data.response.legislator;
   }
 
+  getMemPfdProfile = async params => {
+    const parameters = this.addParams('memPFDprofile', params);
+    const result = await axios.get(this.url, parameters);
+
+    if (result.status !== 200) {
+      throw new Error('Something went wrong..\nPlease try again later.');
+    }
+
+    return result.data.response.member_profile;
+  }
+
   getCandSummary = async params => {
     const parameters = this.addParams('candSummary', params);
     const result = await axios.get(this.url, parameters);
