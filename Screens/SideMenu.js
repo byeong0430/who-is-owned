@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import {
-  ScrollView, View, Text, TextInput, TouchableOpacity
-} from 'react-native';
-import * as sidemenuStyle from '../utils/stylesheets/sidemenu';
-import * as strFunc from '../utils/functions/strFunctions';
+import { View, Text, TextInput } from 'react-native';
 import HeaderLeftIcon from '../components/SideMenu/HeaderLeftIcon';
+import SearchPlaceList from '../components/SideMenu/SearchPlaceList';
 import AlgoliaPlace from '../utils/api/AlgoliaPlace';
+import * as sidemenuStyle from '../utils/stylesheets/sidemenu';
 
 // algolia places api: https://community.algolia.com/places/api-clients.html
 const ap = new AlgoliaPlace();
@@ -43,35 +41,6 @@ export default class SideMenu extends Component {
     this.setState({ hits });
   }
 
-  handleUpdateAndOpenHome = (lat, lng) => {
-    // Update location
-    this.props.screenProps.updateLoc(lat, lng);
-    this.props.navigation.navigate('Home');
-  }
-
-  renderPlaces = () => {
-    if (this.state.hits) {
-      return this.state.hits.map((item, index) => {
-        const { lat, lng } = item._geoloc;
-        const { locale_names, city, county, country } = item;
-        const address = strFunc.joinArrayStr(
-          [locale_names, city, county, country], ', '
-        );
-
-        return (
-          <TouchableOpacity
-            onPress={() => this.handleUpdateAndOpenHome(lat, lng)}
-            style={sidemenuStyle.sideMenuResult}
-            key={`test_${index}`}
-            underlayColor='white'
-          >
-            <Text>{`${address}`}</Text>
-          </TouchableOpacity>
-        );
-      })
-    }
-  }
-
   render() {
     return (
       <View style={sidemenuStyle.sideMenuContainer}>
@@ -80,9 +49,11 @@ export default class SideMenu extends Component {
           onChangeText={query => this.handleChangeQuery(query)}
           value={this.state.query}
         />
-        <ScrollView>
-          {this.renderPlaces()}
-        </ScrollView>
+        <SearchPlaceList
+          updateLoc={this.props.screenProps.updateLoc}
+          navigation={this.props.navigation}
+          hits={this.state.hits}
+        />
       </View>
     );
   }
