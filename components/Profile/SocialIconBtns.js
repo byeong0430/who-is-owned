@@ -7,6 +7,8 @@ import * as socialIconBtnStyle from '../../utils/stylesheets/socialiconbtns';
 
 
 export default class ProfileHeader extends Component {
+  handleOpenSocialMedia = () => Linking.openURL(this.makeSocialMediaUrl(item, socialMedia))
+
   makeSocialMediaUrl = (smItems, smType) => {
     const socialMediaType = smType.split('_')[0];
     let url = '';
@@ -35,9 +37,7 @@ export default class ProfileHeader extends Component {
               type={socialMediaType}
               style={socialIconBtnStyle.footerIcon}
               iconSize={socialIconBtnStyle.iconSize}
-              onPress={() => (
-                Linking.openURL(this.makeSocialMediaUrl(item, socialMedia))
-              )}
+              onPress={this.handleOpenSocialMedia}
             />
             <Text style={socialIconBtnStyle.iconTitle}>
               {socialMediaType.replace(/^[a-z]/, str => str.toUpperCase())}
