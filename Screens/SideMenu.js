@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import {
   ScrollView, View, Text, TextInput, TouchableOpacity
 } from 'react-native';
-import { Icon } from 'react-native-elements';
 import * as sidemenuStyle from '../utils/stylesheets/sidemenu';
-import axios from 'axios';
+import HeaderLeftIcon from '../components/SideMenu/HeaderLeftIcon';
+import AlgoliaPlace from '../utils/api/AlgoliaPlace';
 
 // algolia places api: https://community.algolia.com/places/api-clients.html
+const ap = new AlgoliaPlace();
 
 export default class SideMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
       query: '',
-      result: null
+      hits: null
     };
   }
 
@@ -21,32 +22,26 @@ export default class SideMenu extends Component {
     return {
       headerTitle: (<Text>Back</Text>),
       headerLeft: (
-        <Icon
-          iconStyle={sidemenuStyle.sideMenuBackBtn}
-          name='keyboard-arrow-left'
-          onPress={() => navigation.navigate('Home')}
-        />
+        <HeaderLeftIcon navigation={navigation} />
       )
     };
   };
 
+  handleChangeQuery = query => {
+    this.setState({ query });
+    this.loadPlaces(query);
+  }
+
   loadPlaces = async query => {
     const { gps } = this.props.screenProps;
-    this.setState({ query });
+    let hits = await ap.getPlaces({
+      query,
+      aroundLatLng: gps
+        ? `${gps.latitude},${gps.longitude}`
+        : undefined
+    });
 
-    let result = await axios.post(
-      'https://places-dsn.algolia.net/1/places/query',
-      {
-        query,
-        language: 'en',
-        hitsPerPage: 10,
-        aroundLatLng: gps
-          ? `${gps.latitude},${gps.longitude}`
-          : undefined
-      }
-    );
-    result = result.data.hits;
-    this.setState({ result });
+    this.setState({ hits });
   }
 
   handleUpdateAndOpenHome = (lat, lng) => {
@@ -56,17 +51,21 @@ export default class SideMenu extends Component {
   }
 
   renderPlaces = () => {
-    if (this.state.result) {
-      return this.state.result.map((item, index) => {
+    if (this.state.hits) {
+      return this.state.hits.map((item, index) => {
         const { lat, lng } = item._geoloc;
-        const streetName = (item.locale_names[0]) ? item.locale_names[0] : null;
-        const city = (item.city) ? item.city[0] : null;
-        const county = (item.county) ? item.county[0] : null;
-        const country = (item.country) ? item.country : null;
-        const address = [streetName, city, county, country].filter(item => item !== null).join(', ');
+        const { locale_names, city, county, country } = item;
+        const address = [
+          locale_names, city, county, country
+        ].filter(item => {
+          // If item is an array, select the first item
+          if (typeof item === 'object') { item = item[0]; }
+          return item !== null && item !== undefined
+        }).join(', ');
+
         return (
           <TouchableOpacity
-            onPress={() => { this.handleUpdateAndOpenHome(lat, lng) }}
+            onPress={() => this.handleUpdateAndOpenHome(lat, lng)}
             style={sidemenuStyle.sideMenuResult}
             key={`test_${index}`}
             underlayColor='white'
@@ -83,7 +82,7 @@ export default class SideMenu extends Component {
       <View style={sidemenuStyle.sideMenuContainer}>
         <TextInput
           style={sidemenuStyle.sideMenuInput}
-          onChangeText={query => this.loadPlaces(query)}
+          onChangeText={query => this.handleChangeQuery(query)}
           value={this.state.query}
         />
         <ScrollView>
