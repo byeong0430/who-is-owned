@@ -3,15 +3,20 @@ import { ListItem, Avatar } from 'react-native-elements';
 import * as vars from '../../utils/stylesheets/vars';
 
 export default class ProfileHeader extends Component {
+  handleOpenDetail = () => this.props.navigation.navigate('Detail')
+
   render() {
     const { firstlast, party, first_elected } = this.props.attributes;
     let partyColor = '';
-    if (party === 'R') {
-      partyColor = vars.redColor;
-    } else if (party === 'D') {
-      partyColor = vars.darkBlueColor;
-    } else {
-      partyColor = vars.darkGreyColor;
+    switch (party) {
+      case party === 'R':
+        partyColor = vars.redColor;
+        break;
+      case party === 'D':
+        partyColor = vars.darkBlueColor;
+        break;
+      default:
+        partyColor = vars.darkGreyColor;
     }
 
     return (
@@ -26,9 +31,7 @@ export default class ProfileHeader extends Component {
         }
         title={firstlast}
         subtitle={`First elected in ${first_elected}`}
-        onPressRightIcon={
-          () => this.props.navigation.navigate('Detail')
-        }
+        onPressRightIcon={this.handleOpenDetail}
       />
     );
   }
