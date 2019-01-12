@@ -14,7 +14,7 @@ export const lightGreyColor = '#e3e1e3';
 export const mainFont = 'RobotoRegular';
 export const mainFontSerif = 'RobotoSlab';
 
-export const bigIconSize = 40;
+export const bigIconSize = 49;
 export const mediumIconSize = 30;
 export const smallIconSize = 22;
 
