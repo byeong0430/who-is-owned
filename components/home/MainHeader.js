@@ -4,20 +4,20 @@ import * as headerStyle from '../../utils/stylesheets/mainheader';
 import { List, ListItem } from 'react-native-elements';
 
 export default class MainHeader extends Component {
-  makeAddr = loc => {
-    let addr1 = 'Getting your address..';
-    let addr2 = null;
+  openHandleSideMenu = () => this.props.navigation.navigate('SideMenu')
 
-    if (loc) {
-      const { name, street, city, regionCode, country } = loc;
-      addr1 = this.constructAddr([name, street], ' ');
-      addr2 = this.constructAddr([city, regionCode, country], ', ');
-    }
+  renderMainAddr = loc => {
+    const addr = loc
+      ? this.joinAddrStr([loc.name, loc.street], ' ')
+      : 'Getting your address..';
 
-    return { addr1, addr2 };
+    return addr.toUpperCase();
   }
 
-  constructAddr = (array, joiner) => {
+  renderSubAddr = loc => loc
+    && this.joinAddrStr([loc.city, loc.regionCode, loc.country], ', ').toUpperCase()
+
+  joinAddrStr = (array, joiner) => {
     const fullStr = array.filter(item => item !== null && item !== undefined);
     return fullStr.join(joiner);
   }
@@ -30,13 +30,11 @@ export default class MainHeader extends Component {
             containerStyle={{ borderBottomWidth: 0 }}
             leftIcon={headerStyle.headerIcon}
             leftIconUnderlayColor='transparent'
-            title={this.makeAddr(this.props.location).addr1.toUpperCase()}
-            subtitle={this.makeAddr(this.props.location).addr2}
+            title={this.renderMainAddr(this.props.location)}
+            subtitle={this.renderSubAddr(this.props.location)}
             titleStyle={headerStyle.title}
             subtitleStyle={headerStyle.subTitle}
-            onPressRightIcon={
-              () => this.props.navigation.navigate('SideMenu')
-            }
+            onPressRightIcon={this.openHandleSideMenu}
           />
         </List>
       </View>
