@@ -4,7 +4,7 @@ import * as headerStyle from '../../utils/stylesheets/mainheader';
 import { List, ListItem } from 'react-native-elements';
 
 export default class MainHeader extends Component {
-  openHandleSideMenu = () => this.props.navigation.navigate('SideMenu')
+  handleOpenSideMenu = () => this.props.navigation.navigate('SideMenu')
 
   renderMainAddr = loc => {
     const addr = loc
@@ -34,7 +34,7 @@ export default class MainHeader extends Component {
             subtitle={this.renderSubAddr(this.props.location)}
             titleStyle={headerStyle.title}
             subtitleStyle={headerStyle.subTitle}
-            onPressRightIcon={this.openHandleSideMenu}
+            onPressRightIcon={this.handleOpenSideMenu}
           />
         </List>
       </View>
