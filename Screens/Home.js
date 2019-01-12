@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 
 import * as homeStyle from '../utils/stylesheets/home';
-import MainHeader from '../components/home/MainHeader';
-import Main from '../components/home/Main';
+import MainHeader from '../components/Home/MainHeader';
+import Main from '../components/Home/Main';
 
 export default class Home extends Component {
   constructor(props) {
