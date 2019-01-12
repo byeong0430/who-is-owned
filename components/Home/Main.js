@@ -5,7 +5,7 @@ import { Card } from 'react-native-elements';
 // Stylesheet
 import * as mainStyle from '../../utils/stylesheets/main';
 // API
-import OpenSecret from '../../utils/api/openSecret';
+import OpenSecret from '../../utils/api/OpenSecret';
 // Components
 import ProfileHeader from '../Profile/ProfileHeader';
 import ProfileMain from '../Profile/ProfileMain';

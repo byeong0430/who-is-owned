@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import * as headerStyle from '../../utils/stylesheets/mainheader';
+import * as strFunc from '../../utils/functions/strFunctions';
 import { List, ListItem } from 'react-native-elements';
 
 export default class MainHeader extends Component {
@@ -8,19 +9,14 @@ export default class MainHeader extends Component {
 
   renderMainAddr = loc => {
     const addr = loc
-      ? this.joinAddrStr([loc.name, loc.street], ' ')
+      ? strFunc.joinArrayStr([loc.name, loc.street], ' ')
       : 'Getting your address..';
 
     return addr.toUpperCase();
   }
 
   renderSubAddr = loc => loc
-    && this.joinAddrStr([loc.city, loc.regionCode, loc.country], ', ').toUpperCase()
-
-  joinAddrStr = (array, joiner) => {
-    const fullStr = array.filter(item => item !== null && item !== undefined);
-    return fullStr.join(joiner);
-  }
+    && strFunc.joinArrayStr([loc.city, loc.regionCode, loc.country], ', ').toUpperCase()
 
   render() {
     return (
