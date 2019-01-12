@@ -49,7 +49,7 @@ export default class SideMenu extends Component {
     this.setState({ result });
   }
 
-  updateAndReturnToHome = (lat, lng) => {
+  handleUpdateAndOpenHome = (lat, lng) => {
     // Update location
     this.props.screenProps.updateLoc(lat, lng);
     this.props.navigation.navigate('Home');
@@ -59,14 +59,14 @@ export default class SideMenu extends Component {
     if (this.state.result) {
       return this.state.result.map((item, index) => {
         const { lat, lng } = item._geoloc;
-        const streetName = (item.locale_names) ? item.locale_names[0] : null;
+        const streetName = (item.locale_names[0]) ? item.locale_names[0] : null;
         const city = (item.city) ? item.city[0] : null;
         const county = (item.county) ? item.county[0] : null;
         const country = (item.country) ? item.country : null;
         const address = [streetName, city, county, country].filter(item => item !== null).join(', ');
         return (
           <TouchableOpacity
-            onPress={() => { this.updateAndReturnToHome(lat, lng) }}
+            onPress={() => { this.handleUpdateAndOpenHome(lat, lng) }}
             style={sidemenuStyle.sideMenuResult}
             key={`test_${index}`}
             underlayColor='white'
