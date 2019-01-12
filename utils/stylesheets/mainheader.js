@@ -3,33 +3,31 @@ import * as vars from './vars';
 // Header
 export const headerContainer = {
   borderTopWidth: 0,
+  borderBottomWidth: 5,
+  borderColor: vars.yellowColor,
   marginTop: 0,
-  marginBottom: 10,
-  paddingLeft: 3,
-  backgroundColor: vars.themeColors[0]
+  paddingLeft: 3
 };
 
 // Reference
 // https://react-native-training.github.io/react-native-elements/docs/0.19.1/lists.html#lefticon
 export const headerIcon = {
-  name: 'location-on',
+  name: 'location-city',
   type: 'material',
   style: {
     fontSize: vars.bigIconSize,
-    borderColor: 'transparent',
-    color: 'white',
-    marginLeft: 5
+    color: vars.blueColor,
+    marginLeft: 9
   }
 }
 
 export const title = {
-  fontFamily: vars.mainFont,
-  color: 'white',
-  fontSize: vars.bigFontSize
+  fontFamily: vars.mainFontSerif,
+  color: vars.darkGreyColor,
+  fontSize: vars.mediumFontSize,
 };
 
 export const subTitle = {
-  fontFamily: vars.mainFont,
-  color: 'white',
+  color: vars.greyColor,
   fontSize: vars.smallFontSize
 };

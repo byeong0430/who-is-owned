@@ -56,7 +56,8 @@ export default class App extends Component {
 
   componentDidMount = async () => {
     await Font.loadAsync({
-      'fjallaRegular': require('./assets/fonts/FjallaOne-Regular.ttf')
+      'RobotoRegular': require('./assets/fonts/Roboto-Regular.ttf'),
+      'RobotoSlab': require('./assets/fonts/RobotoSlab-Regular.ttf')
     });
 
     this.setState({ fontLoaded: true });

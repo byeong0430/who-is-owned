@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import * as headerStyle from '../../utils/stylesheets/header';
+import * as headerStyle from '../../utils/stylesheets/mainheader';
 import { List, ListItem } from 'react-native-elements';
 
 export default class MainHeader extends Component {
@@ -30,11 +30,10 @@ export default class MainHeader extends Component {
             containerStyle={{ borderBottomWidth: 0 }}
             leftIcon={headerStyle.headerIcon}
             leftIconUnderlayColor='transparent'
-            title={this.makeAddr(this.props.location).addr1}
+            title={this.makeAddr(this.props.location).addr1.toUpperCase()}
             subtitle={this.makeAddr(this.props.location).addr2}
             titleStyle={headerStyle.title}
             subtitleStyle={headerStyle.subTitle}
-            chevronColor='white'
             onPressRightIcon={
               () => this.props.navigation.navigate('SideMenu')
             }

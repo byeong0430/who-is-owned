@@ -8,7 +8,6 @@ import Main from '../components/home/Main';
 export default class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { method: 'getLegislators' }
   }
 
   render() {
@@ -19,8 +18,8 @@ export default class Home extends Component {
           navigation={this.props.navigation}
         />
         <Main
-          method={this.state.method}
           location={this.props.screenProps.location}
+          navigation={this.props.navigation}
         />
       </View>
     );

@@ -1,11 +1,5 @@
 import * as vars from './vars';
 
-export const profileFooter = {
-  marginLeft: 13,
-  marginTop: 10,
-  marginBottom: 10
-}
-
 export const iconBox = {
   flex: 1,
   alignItems: 'center',
