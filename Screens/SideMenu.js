@@ -3,6 +3,7 @@ import {
   ScrollView, View, Text, TextInput, TouchableOpacity
 } from 'react-native';
 import * as sidemenuStyle from '../utils/stylesheets/sidemenu';
+import * as strFunc from '../utils/functions/strFunctions';
 import HeaderLeftIcon from '../components/SideMenu/HeaderLeftIcon';
 import AlgoliaPlace from '../utils/api/AlgoliaPlace';
 
@@ -21,9 +22,7 @@ export default class SideMenu extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: (<Text>Back</Text>),
-      headerLeft: (
-        <HeaderLeftIcon navigation={navigation} />
-      )
+      headerLeft: (<HeaderLeftIcon navigation={navigation} />)
     };
   };
 
@@ -55,13 +54,9 @@ export default class SideMenu extends Component {
       return this.state.hits.map((item, index) => {
         const { lat, lng } = item._geoloc;
         const { locale_names, city, county, country } = item;
-        const address = [
-          locale_names, city, county, country
-        ].filter(item => {
-          // If item is an array, select the first item
-          if (typeof item === 'object') { item = item[0]; }
-          return item !== null && item !== undefined
-        }).join(', ');
+        const address = strFunc.joinArrayStr(
+          [locale_names, city, county, country], ', '
+        );
 
         return (
           <TouchableOpacity
