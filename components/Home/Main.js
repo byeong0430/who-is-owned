@@ -7,9 +7,9 @@ import * as mainStyle from '../../utils/stylesheets/main';
 // API
 import OpenSecret from '../../utils/api/openSecret';
 // Components
-import ProfileHeader from '../profile/ProfileHeader';
-import ProfileMain from '../profile/ProfileMain';
-import SocialIconBtns from '../profile/SocialIconBtns';
+import ProfileHeader from '../Profile/ProfileHeader';
+import ProfileMain from '../Profile/ProfileMain';
+import SocialIconBtns from '../Profile/SocialIconBtns';
 
 // Initiate OpenSecret class (API)
 const openSecret = new OpenSecret();

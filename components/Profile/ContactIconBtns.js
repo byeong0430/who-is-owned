@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Text, View, Linking } from 'react-native';
-import {Icon} from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import * as ContactIconBtnStyle from '../../utils/stylesheets/contacticonbtns';
 
 export default class ContactIconBtns extends Component {
+  handleOpenCall = () => Linking.openURL(`tel:1 ${this.props.attributes.phone}`);
+
+  handleOpenHomepage = () => Linking.openURL(this.props.attributes.website);
+
   render() {
-    const { attributes } = this.props;
     return (
       <>
         <View style={ContactIconBtnStyle.iconBox}>
@@ -14,10 +17,8 @@ export default class ContactIconBtns extends Component {
             style={ContactIconBtnStyle.footerIcon}
             iconStyle={{ margin: 9.5 }}
             color='grey'
-            onPress={() => (
-              // Assume US (+1) for now
-              Linking.openURL(`tel:1 ${attributes.phone}`)
-            )}
+            // Assume US (+1) for now
+            onPress={this.handleOpenCall}
           />
           <Text style={ContactIconBtnStyle.iconTitle}>
             Call
@@ -30,7 +31,7 @@ export default class ContactIconBtns extends Component {
             style={ContactIconBtnStyle.footerIcon}
             iconStyle={{ margin: 9.5 }}
             color='grey'
-            onPress={() => Linking.openURL(website)}
+            onPress={this.handleOpenHomepage}
           />
           <Text style={ContactIconBtnStyle.iconTitle}>
             Homepage
