@@ -27,7 +27,7 @@ export default class MainHeader extends Component {
       <View>
         <List containerStyle={headerStyle.headerContainer}>
           <ListItem
-            containerStyle={{ borderBottomWidth: 0 }}
+            containerStyle={headerStyle.headerItemContainer}
             leftIcon={headerStyle.headerIcon}
             leftIconUnderlayColor='transparent'
             title={this.renderMainAddr(this.props.location)}
