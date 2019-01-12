@@ -9,11 +9,11 @@ export default class ProfileHeader extends Component {
     const { firstlast, party, first_elected } = this.props.attributes;
     let partyColor = '';
     switch (party) {
-      case party === 'R':
+      case 'R':
         partyColor = vars.redColor;
         break;
-      case party === 'D':
-        partyColor = vars.darkBlueColor;
+      case 'D':
+        partyColor = vars.blueColor;
         break;
       default:
         partyColor = vars.darkGreyColor;
