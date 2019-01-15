@@ -3,6 +3,7 @@ import { Text, TouchableOpacity } from 'react-native';
 import * as strFunc from '../../utils/functions/strFunctions';
 import { handleGetLocation } from '../../utils/functions/locFunctions';
 import appReducer from '../../reducers/reducer';
+import { updateLocation } from '../../actions';
 import { createStore } from 'redux';
 import * as sidemenuStyle from '../../utils/stylesheets/sidemenu';
 
@@ -13,20 +14,15 @@ export default class SearchPlace extends Component {
     // Update location
     const location = await handleGetLocation(longitude, latitude);
 
-    store.dispatch({
-      type: 'UPDATE_LOCATION',
-      payload: { location }
-    })
+    store.dispatch(updateLocation(location));
 
     this.props.navigation.navigate('Home');
   }
 
   render() {
-    const {
-      locale_names, city, county, country,
-      _geoloc: { lat, lng }
-    } = this.props.item;
-
+    const { item } = this.props;
+    const { locale_names, city, county, country } = item;
+    const { lat, lng } = item._geoloc;
     const address = strFunc.joinArrayStr(
       [locale_names, city, county, country], ', '
     );
