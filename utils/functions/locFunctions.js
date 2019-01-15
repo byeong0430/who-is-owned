@@ -1,7 +1,7 @@
 import { Location } from 'expo';
 const usStateCode = require('../data/usStateCode.json');
 
-export const handleGetLocation = async (latitude, longitude) => {
+export const handleGetLocation = async (longitude, latitude) => {
   let location = await Location.reverseGeocodeAsync({ longitude, latitude });
 
   // Select the first array item
