@@ -3,8 +3,9 @@ import { View } from 'react-native';
 import * as headerStyle from '../../utils/stylesheets/mainheader';
 import * as strFunc from '../../utils/functions/strFunctions';
 import { List, ListItem } from 'react-native-elements';
+import { connect } from 'react-redux';
 
-export default class MainHeader extends Component {
+class MainHeader extends Component {
   handleOpenSideMenu = () => this.props.navigation.navigate('SideMenu')
 
   renderMainAddr = loc => {
@@ -19,6 +20,8 @@ export default class MainHeader extends Component {
     && strFunc.joinArrayStr([loc.city, loc.regionCode, loc.country], ', ').toUpperCase()
 
   render() {
+    const { location } = this.props.app;
+
     return (
       <View>
         <List containerStyle={headerStyle.headerContainer}>
@@ -26,8 +29,8 @@ export default class MainHeader extends Component {
             containerStyle={headerStyle.headerItemContainer}
             leftIcon={headerStyle.headerIcon}
             leftIconUnderlayColor='transparent'
-            title={this.renderMainAddr(this.props.location)}
-            subtitle={this.renderSubAddr(this.props.location)}
+            title={this.renderMainAddr(location)}
+            subtitle={this.renderSubAddr(location)}
             titleStyle={headerStyle.title}
             subtitleStyle={headerStyle.subTitle}
             onPressRightIcon={this.handleOpenSideMenu}
@@ -37,3 +40,10 @@ export default class MainHeader extends Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  const { app } = state;
+  return { app }
+};
+
+export default connect(mapStateToProps)(MainHeader);
