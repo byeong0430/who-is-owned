@@ -3,12 +3,13 @@ import { View, Text, TextInput } from 'react-native';
 import HeaderLeftIcon from '../components/SideMenu/HeaderLeftIcon';
 import SearchPlaceList from '../components/SideMenu/SearchPlaceList';
 import AlgoliaPlace from '../utils/api/AlgoliaPlace';
+import { connect } from 'react-redux';
 import * as sidemenuStyle from '../utils/stylesheets/sidemenu';
 
 // algolia places api: https://community.algolia.com/places/api-clients.html
 const ap = new AlgoliaPlace();
 
-export default class SideMenu extends Component {
+class SideMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,11 +27,11 @@ export default class SideMenu extends Component {
 
   handleChangeQuery = query => {
     this.setState({ query });
-    this.loadPlaces(query);
+    this.handleLoadPlaces(query);
   }
 
-  loadPlaces = async query => {
-    const { gps } = this.props.screenProps;
+  handleLoadPlaces = async query => {
+    const { gps } = this.props.app;
     let hits = await ap.getPlaces({
       query,
       aroundLatLng: gps
@@ -58,3 +59,10 @@ export default class SideMenu extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  const { app } = state;
+  return { app }
+};
+
+export default connect(mapStateToProps)(SideMenu);
