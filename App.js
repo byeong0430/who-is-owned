@@ -4,6 +4,7 @@ import { Constants, Location, Permissions, Font } from 'expo';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import appReducer from './reducers/reducer';
+import { updateGps, updateLocation } from './actions';
 import { handleGetLocation } from './utils/functions/locFunctions';
 const usStateCode = require('./utils/data/usStateCode.json');
 
@@ -49,17 +50,11 @@ export default class App extends Component {
       longitude = -118.2437;
       latitude = 34.0522;
 
-      store.dispatch({
-        type: 'UPDATE_GPS',
-        payload: { gps: { longitude, latitude } }
-      })
+      store.dispatch(updateGps(longitude, latitude));
 
       const location = await handleGetLocation(longitude, latitude);
 
-      store.dispatch({
-        type: 'UPDATE_LOCATION',
-        payload: { location }
-      })
+      store.dispatch(updateLocation(location));
     }
   }
 
