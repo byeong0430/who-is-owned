@@ -1,0 +1,26 @@
+// A reducer is a pure function that takes the previous state and an action
+// as arguments and returns a new state
+
+import { combineReducers } from 'redux';
+
+const INITIAL_STATE = {
+  appState: {
+    gps: null,
+    location: null
+  }
+}
+
+const appReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case 'UPDATE_GPS':
+      return { ...state.appState, gps: action.payload.gps };
+    case 'UPDATE_LOCATION':
+      return { ...state.appState, location: action.payload.location };
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({
+  app: appReducer
+});
