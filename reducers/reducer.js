@@ -3,19 +3,25 @@
 
 import { combineReducers } from 'redux';
 
-const INITIAL_STATE = {
-  appState: {
-    gps: null,
-    location: null
-  }
-}
+const INITIAL_APP_STATE = {
+  gps: null,
+  location: null
+};
 
-const appReducer = (state = INITIAL_STATE, action) => {
+const appReducer = (state = INITIAL_APP_STATE, action) => {
   switch (action.type) {
     case 'UPDATE_GPS':
-      return { ...state.appState, gps: action.payload.gps };
+      return {
+        ...state,
+        gps: action.payload.gps
+      };
+
     case 'UPDATE_LOCATION':
-      return { ...state.appState, location: action.payload.location };
+      return {
+        ...state,
+        location: action.payload.location
+      };
+
     default:
       return state;
   }
