@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { Platform } from 'react-native';
 import { Constants, Location, Permissions, Font } from 'expo';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import appReducer from './reducers/reducer';
+import { handleGetLocation } from './utils/functions/locFunctions';
 const usStateCode = require('./utils/data/usStateCode.json');
 
 // Navigation config
 import { RootStack } from './utils/navigation/RootStack';
+
+const store = createStore(appReducer);
 
 // You can have an option to add a loading page
 export default class App extends Component {
@@ -18,18 +24,46 @@ export default class App extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount = async () => {
+    await Font.loadAsync({
+      'RobotoRegular': require('./assets/fonts/Roboto-Regular.ttf'),
+      'RobotoSlab': require('./assets/fonts/RobotoSlab-Regular.ttf')
+    });
+
+    this.setState({ fontLoaded: true });
+  }
+
+  componentWillMount = async () => {
     // Constants.isDevice === true if you're using an emulator
     if (Platform.OS === 'android' && !Constants.isDevice) {
       this.setState({
         errorMessage: 'This will not work on Sketch in an Android emulator. Try it on your device!'
       })
     } else {
-      this._getLocationAsync();
+      const gps = await this.handleGetGps();
+
+      // Parse longitude and latitude and get current address
+      let { longitude, latitude } = gps.coords;
+
+      // Debugging with initial location set to L.A.
+      longitude = -118.2437;
+      latitude = 34.0522;
+
+      store.dispatch({
+        type: 'UPDATE_GPS',
+        payload: { gps: { longitude, latitude } }
+      })
+
+      const location = await handleGetLocation(longitude, latitude);
+
+      store.dispatch({
+        type: 'UPDATE_LOCATION',
+        payload: { location }
+      })
     }
   }
 
-  _getLocationAsync = async () => {
+  handleGetGps = async () => {
     // Ask for location permission
     const { status } = await Permissions.askAsync(Permissions.LOCATION);
 
@@ -40,27 +74,7 @@ export default class App extends Component {
     }
 
     // Get GPS info
-    const gps = await Location.getCurrentPositionAsync({});
-
-    // Parse longitude and latitude and get current address
-    let { longitude, latitude } = gps.coords;
-
-    this.setState({ gps: { latitude, longitude } });
-
-    // Debugging with initial location set to L.A.
-    longitude = -118.2437;
-    latitude = 34.0522;
-
-    this.updateLoc(latitude, longitude);
-  }
-
-  componentDidMount = async () => {
-    await Font.loadAsync({
-      'RobotoRegular': require('./assets/fonts/Roboto-Regular.ttf'),
-      'RobotoSlab': require('./assets/fonts/RobotoSlab-Regular.ttf')
-    });
-
-    this.setState({ fontLoaded: true });
+    return await Location.getCurrentPositionAsync({});
   }
 
   updateLoc = async (latitude, longitude) => {
@@ -84,11 +98,14 @@ export default class App extends Component {
 
   render() {
     return (
-      this.state.fontLoaded ? <RootStack screenProps={{
-        gps: this.state.gps,
-        updateLoc: this.updateLoc,
-        location: this.state.location
-      }} /> : null
+      this.state.fontLoaded ?
+        <Provider store={store}>
+          <RootStack screenProps={{
+            gps: this.state.gps,
+            updateLoc: this.updateLoc,
+            location: this.state.location
+          }} />
+        </Provider> : null
     );
   }
 }
