@@ -13,7 +13,6 @@ export default class SearchPlace extends Component {
   handleUpdateAndOpenHome = async (longitude, latitude) => {
     // Update location
     const location = await handleGetLocation(longitude, latitude);
-
     store.dispatch(updateLocation(location));
 
     this.props.navigation.navigate('Home');

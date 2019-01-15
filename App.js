@@ -72,32 +72,12 @@ export default class App extends Component {
     return await Location.getCurrentPositionAsync({});
   }
 
-  updateLoc = async (latitude, longitude) => {
-    let location = await Location.reverseGeocodeAsync({ longitude, latitude });
-
-    // Select the first array item
-    location = location[0];
-
-    if (location.country === 'United States') {
-      location.regionCode = this.getUsRegionCode(location.region, usStateCode);
-    }
-
-    this.setState({
-      ...this.state,
-      gps: { latitude, longitude },
-      location
-    })
-  }
-
-  getUsRegionCode = (state, stateCodeJson) => stateCodeJson[state];
-
   render() {
     return (
       this.state.fontLoaded ?
         <Provider store={store}>
           <RootStack screenProps={{
             gps: this.state.gps,
-            updateLoc: this.updateLoc,
             location: this.state.location
           }} />
         </Provider> : null

@@ -51,7 +51,6 @@ class SideMenu extends Component {
           value={this.state.query}
         />
         <SearchPlaceList
-          updateLoc={this.props.screenProps.updateLoc}
           navigation={this.props.navigation}
           hits={this.state.hits}
         />

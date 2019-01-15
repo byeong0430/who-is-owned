@@ -7,7 +7,6 @@ export default class SearchPlaceList extends Component {
     if (this.props.hits) {
       return this.props.hits.map((item, key) => (
         <SearchPlace
-          updateLoc={this.props.updateLoc}
           navigation={this.props.navigation}
           key={key}
           item={item}
