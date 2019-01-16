@@ -16,11 +16,15 @@ class MainHeader extends Component {
     return addr.toUpperCase();
   }
 
-  renderSubAddr = loc => loc
-    && strFunc.joinArrayStr([loc.city, loc.regionCode, loc.country], ', ').toUpperCase()
+  renderSubAddr = loc => {
+    if (loc) {
+      const str = strFunc.joinArrayStr([loc.city, loc.regionCode, loc.country], ', ');
+      return str.toUpperCase();
+    }
+  }
 
   render() {
-    const { location } = this.props.app;
+    const { location } = this.props.locDetail;
 
     return (
       <View>
@@ -41,6 +45,6 @@ class MainHeader extends Component {
   }
 }
 
-const mapStateToProps = state => ({ app: state.app });
+const mapStateToProps = state => ({ locDetail: state.locDetail });
 
 export default connect(mapStateToProps)(MainHeader);
