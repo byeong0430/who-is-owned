@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, RefreshControl } from 'react-native';
+import { ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
 
 // Stylesheet
@@ -18,8 +18,7 @@ export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      legiSummary: null,
-      refreshing: false
+      legiSummary: null
     };
   }
 
@@ -29,12 +28,6 @@ export default class Main extends Component {
     });
 
     this.setState({ legiSummary });
-  }
-
-  _onRefresh = async () => {
-    this.setState({ refreshing: true })
-    this.getLegiSummary();
-    this.setState({ refreshing: false })
   }
 
   componentDidUpdate = async prevProps => {
@@ -67,14 +60,7 @@ export default class Main extends Component {
 
   render() {
     return (
-      <ScrollView
-        refreshControl={
-          <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={this._onRefresh}
-          />
-        }
-      >
+      <ScrollView>
         {this.renderFields(this.state.legiSummary)}
       </ScrollView>
     )
