@@ -19,10 +19,10 @@
 
 ## Note
 To run the application, you need to fetch your own API tokens for the following services
-| Service        | URL           |
-| ------------- |:-------------:|
-| Open Secrets      | https://www.opensecrets.org/open-data/api |
-| Algolia Places      | https://community.algolia.com/places/rest.html (`Get Started` button on the bottom)      |
+| Service        | URL                                                                                      |
+| -------------- | ---------------------------------------------------------------------------------------- |
+| Open Secrets   | https://www.opensecrets.org/open-data/api                                                |
+| Algolia Places | https://community.algolia.com/places/rest.html (`Get Started` button on the bottom)      |
 
 | Tables        | Are           | Cool  |
 | ------------- |:-------------:| -----:|
