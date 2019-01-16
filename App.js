@@ -77,7 +77,6 @@ export default class App extends Component {
       this.state.fontLoaded ?
         <Provider store={store}>
           <RootStack screenProps={{
-            gps: this.state.gps,
             location: this.state.location
           }} />
         </Provider> : null
