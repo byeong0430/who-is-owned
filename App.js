@@ -2,16 +2,17 @@ import { Constants, Location, Permissions, Font } from 'expo';
 import React, { Component } from 'react';
 import { Platform } from 'react-native';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import appReducer from './reducers/reducer';
-import { updateGps, updateLocation } from './actions';
-import { handleGetLocation } from './utils/functions/locFunctions';
+import { createStore, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
+import reduxThunk from 'redux-thunk'; // Middleware handler
+import rootReducer from './redux/reducers/';
+import { updateGpsAndLocation } from './redux/thunks';
 
 // Navigation config
 import { RootStack } from './utils/navigation/RootStack';
 
 // Create a store
-const store = createStore(appReducer);
+const store = createStore(rootReducer, applyMiddleware(logger, reduxThunk));
 
 // You can have an option to add a loading page
 export default class App extends Component {
@@ -48,11 +49,7 @@ export default class App extends Component {
       longitude = -118.2437;
       latitude = 34.0522;
 
-      store.dispatch(updateGps(longitude, latitude));
-
-      const location = await handleGetLocation(longitude, latitude);
-
-      store.dispatch(updateLocation(location));
+      store.dispatch(updateGpsAndLocation(longitude, latitude));
     }
   }
 
@@ -72,10 +69,11 @@ export default class App extends Component {
 
   render() {
     return (
-      this.state.fontLoaded ?
+      this.state.fontLoaded && (
         <Provider store={store}>
           <RootStack />
-        </Provider> : null
+        </Provider>
+      )
     );
   }
 }
