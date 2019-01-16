@@ -1,16 +1,16 @@
+import { Constants, Location, Permissions, Font } from 'expo';
 import React, { Component } from 'react';
 import { Platform } from 'react-native';
-import { Constants, Location, Permissions, Font } from 'expo';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import appReducer from './reducers/reducer';
 import { updateGps, updateLocation } from './actions';
 import { handleGetLocation } from './utils/functions/locFunctions';
-const usStateCode = require('./utils/data/usStateCode.json');
 
 // Navigation config
 import { RootStack } from './utils/navigation/RootStack';
 
+// Create a store
 const store = createStore(appReducer);
 
 // You can have an option to add a loading page
@@ -19,8 +19,6 @@ export default class App extends Component {
     super(props);
     this.state = {
       fontLoaded: false,
-      gps: null,
-      location: null,
       errorMessage: null
     };
   }
@@ -76,9 +74,7 @@ export default class App extends Component {
     return (
       this.state.fontLoaded ?
         <Provider store={store}>
-          <RootStack screenProps={{
-            location: this.state.location
-          }} />
+          <RootStack />
         </Provider> : null
     );
   }
