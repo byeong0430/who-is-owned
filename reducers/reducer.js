@@ -11,16 +11,14 @@ const INITIAL_APP_STATE = {
 const appReducer = (state = INITIAL_APP_STATE, action) => {
   switch (action.type) {
     case 'UPDATE_GPS':
-      return {
-        ...state,
+      return Object.assign({}, state, {
         gps: action.payload.gps
-      };
+      });
 
     case 'UPDATE_LOCATION':
-      return {
-        ...state,
+      return Object.assign({}, state, {
         location: action.payload.location
-      };
+      });
 
     default:
       return state;
