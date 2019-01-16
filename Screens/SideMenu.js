@@ -59,9 +59,6 @@ class SideMenu extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { app } = state;
-  return { app }
-};
+const mapStateToProps = state => ({ app: state.app });
 
 export default connect(mapStateToProps)(SideMenu);
