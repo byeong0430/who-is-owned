@@ -1,15 +1,13 @@
 import { createStackNavigator } from 'react-navigation';
 import Home from '../../Screens/Home';
 import SideMenu from '../../Screens/SideMenu';
-import Detail from '../../Screens/Detail';
 
 // Reference: https://medium.com/async-la/custom-transitions-in-react-navigation-2f759408a053
 
 export const RootStack = createStackNavigator(
   {
     Home: Home,
-    SideMenu: SideMenu,
-    Detail: Detail
+    SideMenu: SideMenu
   },
   {
     initialRouteName: 'Home',
