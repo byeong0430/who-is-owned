@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
+import { connect } from 'react-redux';
 
 // Stylesheet
 import * as mainStyle from '../../utils/stylesheets/main';
@@ -14,7 +15,7 @@ import SocialIconBtns from '../Profile/SocialIconBtns';
 // Initiate OpenSecret class (API)
 const openSecret = new OpenSecret();
 
-export default class Main extends Component {
+class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,16 +24,17 @@ export default class Main extends Component {
   }
 
   getLegiSummary = async () => {
+    const { regionCode } = this.props.locDetail.location;
     const legiSummary = await openSecret.getLegislators({
-      id: this.props.location.regionCode
+      id: regionCode
     });
 
     this.setState({ legiSummary });
   }
 
   componentDidUpdate = async prevProps => {
-    if (this.props.location &&
-      (this.props.location !== prevProps.location) ||
+    const { location } = this.props.locDetail;
+    if (location && (location !== prevProps.location) ||
       (this.props.method !== prevProps.method)) {
       this.getLegiSummary();
     }
@@ -66,3 +68,7 @@ export default class Main extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({ locDetail: state.locDetail });
+
+export default connect(mapStateToProps)(Main);

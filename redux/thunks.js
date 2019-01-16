@@ -1,4 +1,4 @@
-import { updateGps, updateLocation } from './actions';
+import { updateGps, updateLocation } from './actions/locActions';
 import { handleGetLocation } from '../utils/functions/locFunctions';
 
 export const updateGpsAndLocation = (longitude, latitude) => async dispatch => {
