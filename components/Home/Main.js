@@ -43,19 +43,21 @@ class Main extends Component {
   renderFields = items => {
     if (items) {
       return items.map((item, index) => {
-        return (
-          <Card
-            key={`card_${index}`}
-            containerStyle={mainStyle.card}
-          >
-            <ProfileHeader
-              attributes={item['@attributes']}
-              navigation={this.props.navigation}
-            />
-            <ProfileMain attributes={item['@attributes']} />
-            <SocialIconBtns attributes={item['@attributes']} />
-          </Card>
-        );
+        if (index < 4) {
+          return (
+            <Card
+              key={`card_${index}`}
+              containerStyle={mainStyle.card}
+            >
+              <ProfileHeader
+                attributes={item['@attributes']}
+                navigation={this.props.navigation}
+              />
+              <ProfileMain attributes={item['@attributes']} />
+              <SocialIconBtns attributes={item['@attributes']} />
+            </Card>
+          );
+        }
       });
     }
   }
