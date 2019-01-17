@@ -7,13 +7,13 @@ export const locationReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'UPDATE_GPS':
       return {
-        ...INITIAL_STATE,
+        ...state,
         gps: action.payload.gps
       };
 
     case 'UPDATE_LOCATION':
       return {
-        ...INITIAL_STATE,
+        ...state,
         location: action.payload.location
       };
 
