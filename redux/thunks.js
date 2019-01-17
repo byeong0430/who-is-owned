@@ -7,10 +7,17 @@ import AlgoliaPlace from '../utils/api/AlgoliaPlace';
 // algolia places api: https://community.algolia.com/places/api-clients.html
 const ap = new AlgoliaPlace();
 
-export const handleUpdateGpsAndLocation = (longitude, latitude) => async dispatch => {
+export const handleInitialGpsLocUpdate = (longitude, latitude) => async dispatch => {
   dispatch(updateGps(longitude, latitude));
   const location = await handleGetLocation(longitude, latitude);
   dispatch(updateLocation(location));
+};
+
+export const handleGpsLocUpdateAndHome = (longitude, latitude, navigation) => async dispatch => {
+  dispatch(updateGps(longitude, latitude));
+  const location = await handleGetLocation(longitude, latitude);
+  dispatch(updateLocation(location));
+  navigation.navigate('Home');
 };
 
 export const handleLoadPlaces = (query, gps) => async dispatch => {
