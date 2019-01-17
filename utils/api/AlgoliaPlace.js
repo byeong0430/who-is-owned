@@ -7,7 +7,7 @@ export default class AlgoliaPlace {
     ];
     this.defaultParams = {
       language: 'en',
-      hitsPerPage: 10,
+      hitsPerPage: 8,
       countries: ['us'] // Limit results only for the U.S.
     };
   }
