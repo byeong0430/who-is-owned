@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import * as headerStyle from '../../utils/stylesheets/mainheader';
-import * as strFunc from '../../utils/functions/strFunctions';
 import { List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
+import * as headerStyle from '../../utils/stylesheets/mainheader';
+import * as strFunc from '../../utils/functions/strFunctions';
 
 class MainHeader extends Component {
   handleOpenSideMenu = () => this.props.navigation.navigate('SideMenu')
