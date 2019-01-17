@@ -12,9 +12,15 @@ export const sideMenuReducer = (state = INITIAL_STATE, action) => {
       }
 
     case 'UPDATE_HITS':
+      const filteredHits = action.payload.hits.
+        filter(hit => {
+          const { value } = hit._highlightResult.administrative[0];
+          return value !== 'Puerto Rico';
+        });
+
       return {
         ...state,
-        hits: action.payload.hits
+        hits: filteredHits
       }
 
     default:
