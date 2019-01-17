@@ -6,9 +6,6 @@ export const sideMenuBackBtn = {
 };
 
 export const sideMenuContainer = {
-  flex: 1,
-  alignItems: 'center',
-  justifyContent: 'center',
   marginTop: 80
 };
 
@@ -18,6 +15,11 @@ export const sideMenuInput = {
   color: 'white',
   backgroundColor: vars.blueColor
 }
+
+export const sideMenuIniVal = {
+  margin: 7,
+  color: vars.darkGreyColor
+};
 
 export const sideMenuScrollView = {
   alignSelf: 'stretch'
