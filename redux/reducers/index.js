@@ -4,8 +4,10 @@
 import { combineReducers } from 'redux';
 import { locationReducer } from './locationReducer';
 import { sideMenuReducer } from './sideMenuReducer';
+import { openSecretReducer } from './openSecretReducer';
 
 export default combineReducers({
   locDetail: locationReducer,
-  sideMenu: sideMenuReducer
+  sideMenu: sideMenuReducer,
+  openSecret: openSecretReducer
 });
