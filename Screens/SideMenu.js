@@ -6,7 +6,6 @@ import { handleLoadPlaces } from '../redux/thunks';
 import { connect } from 'react-redux';
 import * as sidemenuStyle from '../utils/stylesheets/sidemenu';
 
-
 class SideMenu extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -21,6 +20,8 @@ class SideMenu extends Component {
     return (
       <View style={sidemenuStyle.sideMenuContainer}>
         <TextInput
+          placeholder='Search for a city or address'
+          placeholderTextColor={'white'}
           style={sidemenuStyle.sideMenuInput}
           onChangeText={searchTerm => this.props.handleLoadPlaces(searchTerm, gps)}
           value={this.props.sideMenu.query}
@@ -33,12 +34,11 @@ class SideMenu extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  locDetail: state.locDetail,
-  sideMenu: state.sideMenu
+const mapStateToProps = ({ locDetail, sideMenu }) => ({
+  locDetail,
+  sideMenu
 });
 
-const mapDispatchToProps = dispatch => ({
-  handleLoadPlaces: (query, gps) => { dispatch(handleLoadPlaces(query, gps)); }
-});
+const mapDispatchToProps = { handleLoadPlaces };
+
 export default connect(mapStateToProps, mapDispatchToProps)(SideMenu);
