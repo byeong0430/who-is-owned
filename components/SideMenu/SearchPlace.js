@@ -1,25 +1,13 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import * as strFunc from '../../utils/functions/strFunctions';
-import { handleGetLocation } from '../../utils/functions/locFunctions';
-import appReducer from '../../reducers/reducer';
-import { updateLocation } from '../../actions';
-import { createStore } from 'redux';
+import { handleGpsLocUpdateAndHome } from '../../redux/thunks';
+import { connect } from 'react-redux';
 import * as sidemenuStyle from '../../utils/stylesheets/sidemenu';
 
-const store = createStore(appReducer);
-
-export default class SearchPlace extends Component {
-  handleUpdateAndOpenHome = async (longitude, latitude) => {
-    // Update location
-    const location = await handleGetLocation(longitude, latitude);
-    store.dispatch(updateLocation(location));
-
-    this.props.navigation.navigate('Home');
-  }
-
+class SearchPlace extends Component {
   render() {
-    const { item } = this.props;
+    const { item, navigation } = this.props;
     const { locale_names, city, county, country } = item;
     const { lat, lng } = item._geoloc;
     const address = strFunc.joinArrayStr(
@@ -28,7 +16,7 @@ export default class SearchPlace extends Component {
 
     return (
       <TouchableOpacity
-        onPress={() => this.handleUpdateAndOpenHome(lng, lat)}
+        onPress={() => this.props.handleUpdateAndOpenHome(lng, lat, navigation)}
         style={sidemenuStyle.sideMenuResult}
         underlayColor='white'
       >
@@ -37,3 +25,11 @@ export default class SearchPlace extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  handleUpdateAndOpenHome: (longitude, latitude, navigation) => {
+    dispatch(handleGpsLocUpdateAndHome(longitude, latitude, navigation));
+  }
+})
+
+export default connect(null, mapDispatchToProps)(SearchPlace);
