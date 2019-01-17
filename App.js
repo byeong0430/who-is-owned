@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import reduxThunk from 'redux-thunk'; // Middleware handler
 import rootReducer from './redux/reducers/';
-import { handleUpdateGpsAndLocation } from './redux/thunks';
+import { handleInitialGpsLocUpdate } from './redux/thunks';
 
 // Navigation config
 import { RootStack } from './utils/navigation/RootStack';
@@ -49,7 +49,7 @@ export default class App extends Component {
       longitude = -118.2437;
       latitude = 34.0522;
 
-      store.dispatch(handleUpdateGpsAndLocation(longitude, latitude));
+      store.dispatch(handleInitialGpsLocUpdate(longitude, latitude));
     }
   }
 
