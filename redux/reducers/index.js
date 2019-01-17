@@ -3,7 +3,9 @@
 
 import { combineReducers } from 'redux';
 import { locationReducer } from './locationReducer';
+import { sideMenuReducer } from './sideMenuReducer';
 
 export default combineReducers({
-  locDetail: locationReducer
+  locDetail: locationReducer,
+  sideMenu: sideMenuReducer
 });
