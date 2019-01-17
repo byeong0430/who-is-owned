@@ -2,22 +2,12 @@ import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import HeaderLeftIcon from '../components/SideMenu/HeaderLeftIcon';
 import SearchPlaceList from '../components/SideMenu/SearchPlaceList';
-import AlgoliaPlace from '../utils/api/AlgoliaPlace';
+import { handleLoadPlaces } from '../redux/thunks';
 import { connect } from 'react-redux';
 import * as sidemenuStyle from '../utils/stylesheets/sidemenu';
 
-// algolia places api: https://community.algolia.com/places/api-clients.html
-const ap = new AlgoliaPlace();
 
 class SideMenu extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      query: '',
-      hits: null
-    };
-  }
-
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: (<Text>Back</Text>),
@@ -25,40 +15,30 @@ class SideMenu extends Component {
     };
   };
 
-  handleChangeQuery = query => {
-    this.setState({ query });
-    this.handleLoadPlaces(query);
-  }
-
-  handleLoadPlaces = async query => {
-    const { gps } = this.props.app;
-    let hits = await ap.getPlaces({
-      query,
-      aroundLatLng: gps
-        ? `${gps.latitude},${gps.longitude}`
-        : undefined
-    });
-
-    this.setState({ hits });
-  }
-
   render() {
+    const { gps } = this.props.locDetail;
+
     return (
       <View style={sidemenuStyle.sideMenuContainer}>
         <TextInput
           style={sidemenuStyle.sideMenuInput}
-          onChangeText={query => this.handleChangeQuery(query)}
-          value={this.state.query}
+          onChangeText={searchTerm => this.props.handleLoadPlaces(searchTerm, gps)}
+          value={this.props.sideMenu.query}
         />
         <SearchPlaceList
           navigation={this.props.navigation}
-          hits={this.state.hits}
         />
       </View>
     );
   }
 }
 
-const mapStateToProps = state => ({ app: state.app });
+const mapStateToProps = state => ({
+  locDetail: state.locDetail,
+  sideMenu: state.sideMenu
+});
 
-export default connect(mapStateToProps)(SideMenu);
+const mapDispatchToProps = dispatch => ({
+  handleLoadPlaces: (query, gps) => { dispatch(handleLoadPlaces(query, gps)); }
+});
+export default connect(mapStateToProps, mapDispatchToProps)(SideMenu);
