@@ -6,10 +6,6 @@ import MainHeader from '../components/Home/MainHeader';
 import Main from '../components/Home/Main';
 
 export default class Home extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <View style={homeStyle.mainScreen}>
