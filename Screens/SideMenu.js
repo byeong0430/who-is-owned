@@ -1,95 +1,54 @@
 import React, { Component } from 'react';
-import {
-  ScrollView, View, Text, TextInput, TouchableOpacity
-} from 'react-native';
-import { Icon } from 'react-native-elements';
+import { View, Text, TextInput } from 'react-native';
+import HeaderLeftIcon from '../components/SideMenu/HeaderLeftIcon';
+import SearchPlaceList from '../components/SideMenu/SearchPlaceList';
+import { handleLoadPlaces } from '../redux/thunks';
+import { connect } from 'react-redux';
 import * as sidemenuStyle from '../utils/stylesheets/sidemenu';
-import axios from 'axios';
 
-// algolia places api: https://community.algolia.com/places/api-clients.html
-
-export default class SideMenu extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      query: '',
-      result: null
-    };
-  }
-
+class SideMenu extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: (<Text>Back</Text>),
-      headerLeft: (
-        <Icon
-          iconStyle={sidemenuStyle.sideMenuBackBtn}
-          name='keyboard-arrow-left'
-          onPress={() => navigation.navigate('Home')}
-        />
-      )
+      headerLeft: (<HeaderLeftIcon navigation={navigation} />)
     };
   };
 
-  loadPlaces = async query => {
-    const { gps } = this.props.screenProps;
-    this.setState({ query });
-
-    let result = await axios.post(
-      'https://places-dsn.algolia.net/1/places/query',
-      {
-        query,
-        language: 'en',
-        hitsPerPage: 10,
-        aroundLatLng: gps
-          ? `${gps.latitude},${gps.longitude}`
-          : undefined
-      }
-    );
-    result = result.data.hits;
-    this.setState({ result });
-  }
-
-  updateAndReturnToHome = (lat, lng) => {
-    // Update location
-    this.props.screenProps.updateLoc(lat, lng);
-    this.props.navigation.navigate('Home');
-  }
-
-  renderPlaces = () => {
-    if (this.state.result) {
-      return this.state.result.map((item, index) => {
-        const { lat, lng } = item._geoloc;
-        const streetName = (item.locale_names) ? item.locale_names[0] : null;
-        const city = (item.city) ? item.city[0] : null;
-        const county = (item.county) ? item.county[0] : null;
-        const country = (item.country) ? item.country : null;
-        const address = [streetName, city, county, country].filter(item => item !== null).join(', ');
-        return (
-          <TouchableOpacity
-            onPress={() => { this.updateAndReturnToHome(lat, lng) }}
-            style={sidemenuStyle.sideMenuResult}
-            key={`test_${index}`}
-            underlayColor='white'
-          >
-            <Text>{`${address}`}</Text>
-          </TouchableOpacity>
-        );
-      })
-    }
-  }
-
   render() {
+    const { gps } = this.props.locDetail;
+
     return (
       <View style={sidemenuStyle.sideMenuContainer}>
         <TextInput
+          placeholder='Search for a city or address'
+          placeholderTextColor={'white'}
           style={sidemenuStyle.sideMenuInput}
-          onChangeText={query => this.loadPlaces(query)}
-          value={this.state.query}
+          onChangeText={searchTerm => this.props.handleLoadPlaces(searchTerm, gps)}
+          value={this.props.sideMenu.query}
         />
-        <ScrollView>
-          {this.renderPlaces()}
-        </ScrollView>
-      </View>
+        {
+          !this.props.sideMenu.hits || !this.props.sideMenu.query
+            ? (
+              <Text style={sidemenuStyle.sideMenuIniVal}>
+                Only Continental U.S.locations will be displayed..
+              </Text>
+            )
+            : (
+              <SearchPlaceList
+                navigation={this.props.navigation}
+              />
+            )
+        }
+      </View >
     );
   }
 }
+
+const mapStateToProps = ({ locDetail, sideMenu }) => ({
+  locDetail,
+  sideMenu
+});
+
+const mapDispatchToProps = { handleLoadPlaces };
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideMenu);

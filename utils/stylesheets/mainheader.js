@@ -9,6 +9,12 @@ export const headerContainer = {
   paddingLeft: 3
 };
 
+export const headerItemContainer = {
+  paddingTop: 5,
+  paddingBottom: 5,
+  borderBottomWidth: 0
+};
+
 // Reference
 // https://react-native-training.github.io/react-native-elements/docs/0.19.1/lists.html#lefticon
 export const headerIcon = {
