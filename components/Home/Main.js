@@ -9,14 +9,14 @@ import * as mainStyle from '../../utils/stylesheets/main';
 import ProfileHeader from '../Profile/ProfileHeader';
 import ProfileMain from '../Profile/ProfileMain';
 import SocialIconBtns from '../Profile/SocialIconBtns';
-import { handleGetLegislators } from '../../redux/thunks';
+import { getLegislatorSummary } from '../../redux/thunks';
 
 class Main extends Component {
   componentDidUpdate = async prevProps => {
-    const { location } = this.props.locDetail;
+    const { locDetail, getLegislatorSummary } = this.props;
 
-    if (location && (location !== prevProps.location)) {
-      this.props.getLegislatorSummary(location.regionCode);
+    if (locDetail.location && (locDetail.location !== prevProps.location)) {
+      getLegislatorSummary(locDetail.location.regionCode);
     }
   }
 
@@ -24,17 +24,19 @@ class Main extends Component {
     if (items) {
       return items.map((item, index) => {
         if (index < 4) {
+          const attributes = item['@attributes'];
+
           return (
             <Card
               key={`card_${index}`}
               containerStyle={mainStyle.card}
             >
               <ProfileHeader
-                attributes={item['@attributes']}
+                attributes={attributes}
                 navigation={this.props.navigation}
               />
-              <ProfileMain attributes={item['@attributes']} />
-              <SocialIconBtns attributes={item['@attributes']} />
+              <ProfileMain attributes={attributes} />
+              <SocialIconBtns attributes={attributes} />
             </Card>
           );
         }
@@ -51,13 +53,11 @@ class Main extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  locDetail: state.locDetail,
-  openSecret: state.openSecret
+const mapStateToProps = ({ locDetail, openSecret }) => ({
+  locDetail,
+  openSecret
 });
 
-const mapDispatchToProps = dispatch => ({
-  getLegislatorSummary: regionCode => { dispatch(handleGetLegislators(regionCode)); }
-});
+const mapDispatchToProps = { getLegislatorSummary };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

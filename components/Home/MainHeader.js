@@ -45,6 +45,6 @@ class MainHeader extends Component {
   }
 }
 
-const mapStateToProps = state => ({ locDetail: state.locDetail });
+const mapStateToProps = ({ locDetail }) => ({ locDetail });
 
 export default connect(mapStateToProps)(MainHeader);
