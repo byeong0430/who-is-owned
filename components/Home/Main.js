@@ -5,38 +5,18 @@ import { connect } from 'react-redux';
 
 // Stylesheet
 import * as mainStyle from '../../utils/stylesheets/main';
-// API
-import OpenSecret from '../../utils/api/OpenSecret';
 // Components
 import ProfileHeader from '../Profile/ProfileHeader';
 import ProfileMain from '../Profile/ProfileMain';
 import SocialIconBtns from '../Profile/SocialIconBtns';
-
-// Initiate OpenSecret class (API)
-const openSecret = new OpenSecret();
+import { handleGetLegislators } from '../../redux/thunks';
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      legiSummary: null
-    };
-  }
-
-  getLegiSummary = async () => {
-    const { regionCode } = this.props.locDetail.location;
-    const legiSummary = await openSecret.getLegislators({
-      id: regionCode
-    });
-
-    this.setState({ legiSummary });
-  }
-
   componentDidUpdate = async prevProps => {
     const { location } = this.props.locDetail;
-    if (location && (location !== prevProps.location) ||
-      (this.props.method !== prevProps.method)) {
-      this.getLegiSummary();
+
+    if (location && (location !== prevProps.location)) {
+      this.props.getLegislatorSummary(location.regionCode);
     }
   }
 
@@ -65,12 +45,19 @@ class Main extends Component {
   render() {
     return (
       <ScrollView>
-        {this.renderFields(this.state.legiSummary)}
+        {this.renderFields(this.props.openSecret.legislatorSummary)}
       </ScrollView>
     )
   }
 }
 
-const mapStateToProps = state => ({ locDetail: state.locDetail });
+const mapStateToProps = state => ({
+  locDetail: state.locDetail,
+  openSecret: state.openSecret
+});
 
-export default connect(mapStateToProps)(Main);
+const mapDispatchToProps = dispatch => ({
+  getLegislatorSummary: regionCode => { dispatch(handleGetLegislators(regionCode)); }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
