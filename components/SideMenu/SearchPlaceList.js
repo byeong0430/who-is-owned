@@ -7,15 +7,13 @@ class SearchPlaceList extends Component {
   renderPlaces = () => {
     if (this.props.sideMenu.hits) {
       const { hits } = this.props.sideMenu;
-      return hits.map((item, key) => {
-        if (key < 5) {
-          <SearchPlace
-            navigation={this.props.navigation}
-            key={key}
-            item={item}
-          />
-        }
-      });
+      return hits.map((item, key) => (
+        <SearchPlace
+          navigation={this.props.navigation}
+          key={key}
+          item={item}
+        />
+      ));
     }
   }
 
