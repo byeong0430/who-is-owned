@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 import SearchPlace from './SearchPlace';
+import { connect } from 'react-redux';
 
-export default class SearchPlaceList extends Component {
+class SearchPlaceList extends Component {
   renderPlaces = () => {
-    if (this.props.hits) {
-      return this.props.hits.map((item, key) => (
-        <SearchPlace
-          navigation={this.props.navigation}
-          key={key}
-          item={item}
-        />
-      ));
+    if (this.props.sideMenu.hits) {
+      const { hits } = this.props.sideMenu;
+      return hits.map((item, key) => {
+        if (key < 5) {
+          <SearchPlace
+            navigation={this.props.navigation}
+            key={key}
+            item={item}
+          />
+        }
+      });
     }
   }
 
@@ -23,3 +27,7 @@ export default class SearchPlaceList extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({ sideMenu: state.sideMenu });
+
+export default connect(mapStateToProps)(SearchPlaceList);
