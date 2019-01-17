@@ -26,10 +26,20 @@ class SideMenu extends Component {
           onChangeText={searchTerm => this.props.handleLoadPlaces(searchTerm, gps)}
           value={this.props.sideMenu.query}
         />
-        <SearchPlaceList
-          navigation={this.props.navigation}
-        />
-      </View>
+        {
+          !this.props.sideMenu.hits || !this.props.sideMenu.query
+            ? (
+              <Text style={sidemenuStyle.sideMenuIniVal}>
+                Only Continental U.S.locations will be displayed..
+              </Text>
+            )
+            : (
+              <SearchPlaceList
+                navigation={this.props.navigation}
+              />
+            )
+        }
+      </View >
     );
   }
 }
