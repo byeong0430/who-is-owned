@@ -15,7 +15,8 @@ class Main extends Component {
   componentDidUpdate = async prevProps => {
     const { locDetail, getLegislatorSummary } = this.props;
 
-    if (locDetail.location && (locDetail.location !== prevProps.location)) {
+    if (locDetail.location &&
+      (locDetail.location !== prevProps.location)) {
       getLegislatorSummary(locDetail.location.regionCode);
     }
   }
