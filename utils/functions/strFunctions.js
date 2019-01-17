@@ -1,11 +1,19 @@
 // Functions used in multiple components
 
 export const joinArrayStr = (array, joiner) => {
-  return array.filter(item => {
-    // If item is an array, select the first item
-    if (typeof item === 'object' && item !== null) {
-      item = item[0];
+  const filteredArr = [];
+
+  array.forEach(item => {
+    if (item === null || item === undefined) {
+      return false;
     }
-    return item !== undefined
-  }).join(joiner)
+
+    if (typeof item === 'object') {
+      filteredArr.push(item[0]);
+    } else {
+      filteredArr.push(item);
+    }
+  })
+
+  return filteredArr.join(joiner);
 };
