@@ -1,10 +1,8 @@
 # You Got Owned
 **You Got Owned** is a mobile application designed to help you find out how much donation U.S. politicians received based on your current / selected location.
 
-### Tech Stack
-1. `React Native`
-2. `Redux`
-3. Open-source APIs ([OpenSecrets](https://www.opensecrets.org/), [Algolia Places](https://community.algolia.com/places/))
+#### Tech Stack
+`React Native`, `Redux`
 
 # Screenshot
 ![Screenshot](./assets/main_page.jpg)
